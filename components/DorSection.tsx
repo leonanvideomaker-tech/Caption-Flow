@@ -96,7 +96,7 @@ export default function DorSection() {
             >
               <p style={{ fontSize: "1.2rem", fontWeight: 700, color: "#FF6D29", lineHeight: 1.7, margin: 0 }}>
                 Isso não é falta de talento.
-                <br className="mobile-hide" />
+                <br />
                 É falta de ferramenta. 👇
               </p>
             </div>

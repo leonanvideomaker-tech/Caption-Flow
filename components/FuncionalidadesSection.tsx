@@ -54,9 +54,12 @@ export default function FuncionalidadesSection() {
             className="font-bold text-white mb-4 leading-tight"
             style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)", letterSpacing: "-0.02em" }}
           >
-            Tudo que você precisa,
-            <br className="mobile-hide" />
-            <span className="gradient-text">dentro do <span style={{ color: "#FF6D29" }}>Adobe Premiere</span>.</span>
+            <span className="md:hidden">Tudo que você<br />precisa, dentro do<br />
+              <span style={{ color: "#FF6D29" }}>Adobe Premiere</span>.
+            </span>
+            <span className="hidden md:inline">Tudo que você precisa,{" "}
+              <span className="gradient-text">dentro do <span style={{ color: "#FF6D29" }}>Adobe Premiere</span>.</span>
+            </span>
           </h2>
           <p className="text-[#a1a1a6] mx-auto hidden md:block" style={{ maxWidth: "500px" }}>
             Passe o mouse sobre cada aba para explorar o que o Caption<span style={{ color: "#FF6D29" }}>Flow</span> faz por você.

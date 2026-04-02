@@ -123,13 +123,13 @@ export default function OfertaSection() {
         {/* Cards */}
         <div className="flex flex-col md:flex-row items-stretch justify-center gap-5">
 
-          {/* Card 1 — Somente a Extensão */}
+          {/* Card 1 — Somente a Extensão (aparece 2º no mobile) */}
           <motion.div
             custom={1}
             variants={revealVariants}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
-            className="flex flex-col"
+            className="flex flex-col order-2 md:order-1"
             style={{
               flex: "0 0 auto",
               width: "100%",
@@ -184,13 +184,13 @@ export default function OfertaSection() {
             </div>
           </motion.div>
 
-          {/* Card 2 — Combo Completo */}
+          {/* Card 2 — Combo Completo (aparece 1º no mobile) */}
           <motion.div
             custom={2}
             variants={revealVariants}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
-            className="flex flex-col flex-1 relative"
+            className="flex flex-col flex-1 relative order-1 md:order-2"
             style={{ maxWidth: "480px", margin: "0 auto", width: "100%" }}
           >
           <div

@@ -41,9 +41,8 @@ export default function BeneficiosSection() {
             className="font-bold text-white mb-4 leading-tight"
             style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)", letterSpacing: "-0.02em" }}
           >
-            O que muda no
-            <br className="mobile-hide" />
-            <span className="gradient-text">seu fluxo de trabalho.</span>
+            <span className="md:hidden">O que muda no seu<br /><span className="gradient-text">fluxo de trabalho.</span></span>
+            <span className="hidden md:inline">O que muda no <span className="gradient-text">seu fluxo de trabalho.</span></span>
           </h2>
         </div>
 
