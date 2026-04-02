@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, LayoutGroup } from "motion/react";
 import { TextRotate, TextRotateRef } from "@/components/ui/text-rotate";
 import GradientBordersButton from "@/components/ui/gradient-borders-button";
 import { GlowyWaves } from "@/components/ui/glowy-waves";
@@ -66,7 +66,10 @@ export default function HeroSection() {
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ type: "spring", damping: 30, stiffness: 400 }}
               >
-                <span
+                <LayoutGroup>
+                <motion.span
+                  layout
+                  transition={{ type: "spring", damping: 30, stiffness: 400 }}
                   style={{
                     fontFamily: "'Space Grotesk', sans-serif",
                     fontSize: "clamp(1.6rem, 5vw, 4rem)",
@@ -76,7 +79,7 @@ export default function HeroSection() {
                   }}
                 >
                   Crie legendas
-                </span>
+                </motion.span>
                 <TextRotate
                   ref={rotateRef}
                   texts={rotatingWords}
@@ -100,6 +103,7 @@ export default function HeroSection() {
                     whiteSpace: "nowrap",
                   }}
                 />
+                </LayoutGroup>
               </motion.div>
             ) : (
               <motion.div
