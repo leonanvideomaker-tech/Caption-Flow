@@ -24,7 +24,7 @@ const items: AccordionItemData[] = [
     description: "Redesign após legendar? Copie e cole o estilo em todos os clips de uma vez.",
     imageUrl: "",
     videoUrl: "/videos/atualizar.mp4",
-    icon: "🔄",
+    icon: "❇️",
   },
   {
     id: 4,
