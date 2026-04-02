@@ -18,7 +18,7 @@ export default function DorSection() {
             style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)", letterSpacing: "-0.02em", color: "#fff" }}
           >
             A cada entrega, você passa
-            <br />
+            <br className="mobile-hide" />
             pelo mesmo inferno silencioso.
           </h2>
         </div>
@@ -96,7 +96,7 @@ export default function DorSection() {
             >
               <p style={{ fontSize: "1.2rem", fontWeight: 700, color: "#FF6D29", lineHeight: 1.7, margin: 0 }}>
                 Isso não é falta de talento.
-                <br />
+                <br className="mobile-hide" />
                 É falta de ferramenta. 👇
               </p>
             </div>

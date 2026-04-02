@@ -28,7 +28,7 @@ export default function OQueESection() {
             style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)", letterSpacing: "-0.02em", color: "#0e0e0e" }}
           >
             O problema não é o seu vídeo.
-            <br />
+            <br className="mobile-hide" />
             É o{" "}
             <span style={{
               display: "inline",
@@ -45,7 +45,7 @@ export default function OQueESection() {
             style={{ maxWidth: "480px", fontSize: "1.05rem", color: "#5a5a5a" }}
           >
             As principais razões pelas quais você perde
-            <br />
+            <br className="mobile-hide" />
             horas com legenda em vez de editar:
           </p>
         </div>

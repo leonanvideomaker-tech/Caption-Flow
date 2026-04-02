@@ -81,14 +81,14 @@ export default function Navbar() {
             </div>
 
             <a href="#offer"
-              className="hidden md:inline-flex items-center gap-1.5 rounded-xl px-4 py-2 text-sm font-bold transition-all hover:opacity-90 active:scale-95"
+              className="inline-flex items-center gap-1.5 rounded-xl px-4 py-2 text-sm font-bold transition-all hover:opacity-90 active:scale-95"
               style={{ background: 'linear-gradient(135deg,#ff9063,#FF6D29)', color: '#fff', textDecoration: 'none', fontFamily: "'Space Grotesk', sans-serif", boxShadow: '0 4px 16px rgba(255,109,41,0.25)' }}
             >
               Comprar agora →
             </a>
 
             <button onClick={() => setOpen(!open)}
-              className="flex md:hidden h-9 w-9 items-center justify-center rounded-lg text-white"
+              className="hidden h-9 w-9 items-center justify-center rounded-lg text-white"
               style={{ border: '1px solid rgba(72,72,71,0.25)', background: 'rgba(255,255,255,0.04)' }}
               aria-label="Menu"
             >

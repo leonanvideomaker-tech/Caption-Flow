@@ -27,7 +27,7 @@ export default function ComoFuncionaSection() {
             style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)", letterSpacing: "-0.02em", color: "#0e0e0e" }}
           >
             Três passos.
-            <br />
+            <br className="mobile-hide" />
             <span style={{ color: "#FF6D29" }}>Menos de 1 minuto.</span>
           </h2>
           <p style={{ color: "#5a5a5a" }}>Qualquer editor consegue. Sério.</p>

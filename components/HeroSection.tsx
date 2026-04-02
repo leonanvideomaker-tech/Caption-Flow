@@ -29,7 +29,7 @@ export default function HeroSection() {
 
   return (
     <section
-      className="relative flex items-center justify-center text-center px-6 overflow-hidden"
+      className="hero-section relative flex items-center justify-center text-center px-6 overflow-hidden"
       style={{
         minHeight: "100vh",
         background:
@@ -38,7 +38,7 @@ export default function HeroSection() {
     >
       <GlowyWaves />
 
-      <div className="relative max-w-4xl mx-auto" style={{ paddingTop: "80px" }}>
+      <div className="hero-inner relative max-w-4xl mx-auto" style={{ paddingTop: "80px" }}>
         {/* Badge */}
         <div
           className="inline-flex items-center gap-2 mb-10"

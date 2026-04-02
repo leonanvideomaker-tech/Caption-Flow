@@ -55,7 +55,7 @@ export default function FuncionalidadesSection() {
             style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)", letterSpacing: "-0.02em" }}
           >
             Tudo que você precisa,
-            <br />
+            <br className="mobile-hide" />
             <span className="gradient-text">dentro do <span style={{ color: "#FF6D29" }}>Adobe Premiere</span>.</span>
           </h2>
           <p className="text-[#a1a1a6] mx-auto" style={{ maxWidth: "500px" }}>

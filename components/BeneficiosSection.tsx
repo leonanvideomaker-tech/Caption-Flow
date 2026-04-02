@@ -42,7 +42,7 @@ export default function BeneficiosSection() {
             style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)", letterSpacing: "-0.02em" }}
           >
             O que muda no
-            <br />
+            <br className="mobile-hide" />
             <span className="gradient-text">seu fluxo de trabalho.</span>
           </h2>
         </div>

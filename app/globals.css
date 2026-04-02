@@ -227,8 +227,14 @@ h1, h2, h3, h4 {
 @media (max-width: 768px) {
   .price-tag { font-size: 2.2rem; }
 
-  /* Hero */
-  .hero-subtitle { font-size: 0.97rem !important; }
+  /* Hero — reduz padding topo */
+  .hero-section { min-height: 90vh !important; }
+  .hero-inner { padding-top: 56px !important; }
+  .hero-subtitle { font-size: 0.95rem !important; }
+
+  /* Títulos — sem quebra forçada, fluem naturalmente */
+  h1, h2, h3 { word-break: keep-all; overflow-wrap: break-word; }
+  br.mobile-hide { display: none; }
 
   /* ExpandSection — menos altura em mobile */
   .expand-section { height: 250vh !important; }
@@ -242,12 +248,10 @@ h1, h2, h3, h4 {
   /* FAQ summary menor */
   .faq-item summary { font-size: 0.92rem; }
 
-  /* Offer cards — garantir fullwidth */
-  .offer-card-wrapper { max-width: 100% !important; width: 100% !important; }
-
   /* Step number menor */
   .step-number { width: 40px; height: 40px; font-size: 0.95rem; }
 
-  /* Botão primário fullwidth em mobile */
-  .btn-primary-mobile { width: 100%; justify-content: center; }
+  /* Seções — padding vertical menor */
+  .py-24 { padding-top: 4rem !important; padding-bottom: 4rem !important; }
+  .py-28 { padding-top: 4.5rem !important; padding-bottom: 4.5rem !important; }
 }

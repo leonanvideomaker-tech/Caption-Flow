@@ -85,6 +85,8 @@ export default function ExpandSection() {
           muted
           playsInline
           preload="auto"
+          // @ts-ignore — webkit-playsinline necessário para iOS
+          {...{ "webkit-playsinline": "true" }}
           style={{
             position: "absolute",
             inset: 0,

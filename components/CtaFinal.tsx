@@ -14,7 +14,7 @@ export default function CtaFinal() {
             style={{ fontSize: "clamp(1.8rem, 4.5vw, 3rem)", letterSpacing: "-0.03em" }}
           >
             Você vai legendar o próximo
-            <br />
+            <br className="mobile-hide" />
             <span className="gradient-text">vídeo do mesmo jeito?</span>
           </h2>
           <p className="text-[#a1a1a6] mb-6 mx-auto leading-relaxed" style={{ maxWidth: "560px", fontSize: "1.05rem" }}>
@@ -26,7 +26,7 @@ export default function CtaFinal() {
           <p className="text-white font-semibold mb-10" style={{ fontSize: "1.1rem" }}>
             Por <strong style={{ color: "#FF6D29" }}>12x de R$16,17</strong>, você para de perder tempo com isso hoje.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a href="#offer" className="btn-primary" style={{ fontSize: "1.05rem", padding: "16px 36px" }}>
               Resolver isso agora <span className="arrow">→</span>
             </a>
