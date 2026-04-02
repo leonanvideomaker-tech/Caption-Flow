@@ -56,17 +56,18 @@ export default function HeroSection() {
 
         {/* Headline — container com altura fixa para não deslocar demais conteúdo */}
         <div style={{ height: "clamp(4.5rem, 12vw, 8rem)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "12px" }}>
+          <LayoutGroup>
           <AnimatePresence mode="wait">
             {phase === "rotating" ? (
-              <motion.div
+              <motion.p
                 key="rotating"
-                className="flex flex-wrap items-baseline justify-center gap-x-2"
+                className="flex whitespace-pre items-baseline justify-center"
+                layout
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ type: "spring", damping: 30, stiffness: 400 }}
               >
-                <LayoutGroup>
                 <motion.span
                   layout
                   transition={{ type: "spring", damping: 30, stiffness: 400 }}
@@ -75,10 +76,9 @@ export default function HeroSection() {
                     fontSize: "clamp(1.6rem, 5vw, 4rem)",
                     fontWeight: 800, color: "#fff",
                     letterSpacing: "-0.04em", lineHeight: 1.15,
-                    whiteSpace: "nowrap",
                   }}
                 >
-                  Crie legendas
+                  {"Crie legendas "}
                 </motion.span>
                 <TextRotate
                   ref={rotateRef}
@@ -100,15 +100,14 @@ export default function HeroSection() {
                     background: "linear-gradient(135deg, rgba(255,144,99,0.2) 0%, rgba(255,109,41,0.25) 100%)",
                     border: "1px solid rgba(255,109,41,0.3)",
                     color: "#FF6D29",
-                    whiteSpace: "nowrap",
                   }}
                 />
-                </LayoutGroup>
-              </motion.div>
+              </motion.p>
             ) : (
-              <motion.div
+              <motion.p
                 key="final"
-                className="flex flex-wrap items-baseline justify-center gap-x-1"
+                className="flex whitespace-pre items-baseline justify-center"
+                layout
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ type: "spring", damping: 30, stiffness: 350 }}
@@ -118,12 +117,13 @@ export default function HeroSection() {
                   fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1.15,
                 }}
               >
-                <span style={{ color: "#adaaaa", whiteSpace: "nowrap" }}>Crie com o </span>
-                <span style={{ color: "#fff", whiteSpace: "nowrap" }}>Caption</span>
-                <span style={{ color: "#FF6D29", whiteSpace: "nowrap" }}>Flow</span>
-              </motion.div>
+                <span style={{ color: "#adaaaa" }}>{"Crie com o "}</span>
+                <span style={{ color: "#fff" }}>Caption</span>
+                <span style={{ color: "#FF6D29" }}>Flow</span>
+              </motion.p>
             )}
           </AnimatePresence>
+          </LayoutGroup>
         </div>
 
         {/* Subtítulo */}
