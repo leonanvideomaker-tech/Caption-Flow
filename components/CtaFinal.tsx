@@ -13,9 +13,8 @@ export default function CtaFinal() {
             className="font-extrabold text-white mb-5 leading-tight"
             style={{ fontSize: "clamp(1.8rem, 4.5vw, 3rem)", letterSpacing: "-0.03em" }}
           >
-            Você vai legendar o próximo
-            {" "}<br className="hidden md:block" />
-            <span className="gradient-text">vídeo do mesmo jeito?</span>
+            <span className="md:hidden">Você vai legendar o<br />próximo vídeo do<br /><span className="gradient-text">mesmo jeito?</span></span>
+            <span className="hidden md:inline">Você vai legendar o próximo<br /><span className="gradient-text">vídeo do mesmo jeito?</span></span>
           </h2>
           <p className="text-[#a1a1a6] mb-6 mx-auto leading-relaxed" style={{ maxWidth: "560px", fontSize: "1.05rem" }}>
             Pode continuar assim. Pode continuar saindo do Premiere, usando ferramenta externa, reimportando, sincronizando na mão, entregando com aquela legenda que você mesmo sabe que não está à altura do resto da edição.

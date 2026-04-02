@@ -17,9 +17,8 @@ export default function DorSection() {
             className="font-bold leading-tight mb-8"
             style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)", letterSpacing: "-0.02em", color: "#fff" }}
           >
-            A cada entrega, você passa
-            {" "}<br className="hidden md:block" />
-            pelo mesmo inferno silencioso.
+            <span className="md:hidden">A cada entrega, você<br />passa pelo mesmo<br />inferno silencioso.</span>
+            <span className="hidden md:inline">A cada entrega, você passa<br />pelo mesmo inferno silencioso.</span>
           </h2>
         </div>
 

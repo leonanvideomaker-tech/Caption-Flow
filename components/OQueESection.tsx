@@ -27,9 +27,7 @@ export default function OQueESection() {
             className="font-bold mb-5 leading-tight"
             style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)", letterSpacing: "-0.02em", color: "#0e0e0e" }}
           >
-            O problema não é o seu vídeo.
-            {" "}<br className="hidden md:block" />
-            É o{" "}
+            <span className="md:hidden">O problema não é o<br />seu vídeo. É o{" "}
             <span style={{
               display: "inline",
               background: "#FF6D29",
@@ -38,7 +36,17 @@ export default function OQueESection() {
               padding: "2px 10px",
               borderRadius: "6px",
             }}>workflow</span>
-            {" "}que te trava.
+            <br />que te trava.</span>
+            <span className="hidden md:inline">O problema não é o seu vídeo.<br />É o{" "}
+            <span style={{
+              display: "inline",
+              background: "#FF6D29",
+              color: "#fff",
+              fontWeight: 800,
+              padding: "2px 10px",
+              borderRadius: "6px",
+            }}>workflow</span>
+            {" "}que te trava.</span>
           </h2>
           <p
             className="mx-auto leading-relaxed text-center"
