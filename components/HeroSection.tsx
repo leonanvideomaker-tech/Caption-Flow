@@ -61,10 +61,10 @@ export default function HeroSection() {
               <motion.div
                 key="rotating"
                 className="flex flex-wrap items-baseline justify-center gap-x-2"
-                initial={{ opacity: 0, filter: "blur(8px)", y: 8 }}
-                animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-                exit={{ opacity: 0, filter: "blur(8px)", y: -12 }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ type: "spring", damping: 30, stiffness: 400 }}
               >
                 <span
                   style={{
@@ -82,12 +82,12 @@ export default function HeroSection() {
                   texts={rotatingWords}
                   auto={false}
                   loop={false}
-                  staggerFrom="first"
-                  staggerDuration={0.04}
-                  initial={{ y: "60%", opacity: 0, filter: "blur(4px)" }}
-                  animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-                  exit={{ y: "-60%", opacity: 0, filter: "blur(4px)" }}
-                  transition={{ type: "spring", damping: 22, stiffness: 200 }}
+                  staggerFrom="last"
+                  staggerDuration={0.025}
+                  initial={{ y: "100%" }}
+                  animate={{ y: 0 }}
+                  exit={{ y: "-120%" }}
+                  transition={{ type: "spring", damping: 30, stiffness: 400 }}
                   mainClassName="overflow-hidden py-1 px-4 justify-center rounded-2xl"
                   splitLevelClassName="overflow-hidden pb-0.5"
                   style={{
@@ -105,9 +105,9 @@ export default function HeroSection() {
               <motion.div
                 key="final"
                 className="flex flex-wrap items-baseline justify-center gap-x-1"
-                initial={{ opacity: 0, y: 20, filter: "blur(12px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ type: "spring", damping: 30, stiffness: 350 }}
                 style={{
                   fontFamily: "'Space Grotesk', sans-serif",
                   fontSize: "clamp(1.6rem, 5vw, 4rem)",
