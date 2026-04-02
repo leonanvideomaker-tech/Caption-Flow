@@ -13,6 +13,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `
+          (function(){
+            try {
+              if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+              }
+            } catch(e){}
+          })();
+        `}} />
+      </head>
       <body className="min-h-full">{children}</body>
     </html>
   );

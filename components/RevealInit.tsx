@@ -1,20 +1,19 @@
 "use client";
 import { useEffect } from "react";
-import { usePathname } from "next/navigation";
 
 export default function RevealInit() {
-  const pathname = usePathname();
-
-  // Força scroll no topo em toda navegação — tem que ser síncrono antes de qualquer render
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      history.scrollRestoration = "manual";
-      window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
-    }
-  }, [pathname]);
+    // Garante scroll no topo — duplo rAF para pegar após o primeiro paint
+    history.scrollRestoration = "manual";
+    const forceTop = () => {
+      window.scrollTo(0, 0);
+    };
+    forceTop();
+    requestAnimationFrame(() => {
+      requestAnimationFrame(forceTop);
+    });
 
-  // Reveal ao scroll
-  useEffect(() => {
+    // Reveal ao scroll
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
