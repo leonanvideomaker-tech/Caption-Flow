@@ -3,26 +3,12 @@
 import { useEffect, useRef } from "react"
 import { useScroll, useTransform, motion } from "motion/react"
 
-// Mobile: vídeo autoplay simples (iOS não suporta scrubbing por currentTime)
+// Mobile: vídeo como background com título sobreposto
 function MobileExpandSection() {
   return (
-    <section id="caption-flow-em-acao" style={{ background: "#0e0e0e", padding: "0" }}>
-      <div style={{ textAlign: "center", padding: "48px 24px 24px" }}>
-        <p className="section-label" style={{ marginBottom: "12px" }}>Caption Flow em ação</p>
-        <h2 style={{
-          fontFamily: "'Space Grotesk', sans-serif",
-          fontSize: "clamp(1.5rem, 6vw, 2.2rem)",
-          fontWeight: 800, letterSpacing: "-0.03em",
-          color: "#fff", lineHeight: 1.2, marginBottom: "8px",
-        }}>
-          Expanda sua forma de criar legendas{" "}
-          <span className="orange-gradient-text">no Adobe Premiere</span>
-        </h2>
-        <p style={{ color: "#adaaaa", fontSize: "0.9rem", lineHeight: 1.6, fontFamily: "'Inter', sans-serif", marginBottom: "24px" }}>
-          Veja o painel em ação.
-        </p>
-      </div>
-      <div style={{ width: "100%", aspectRatio: "16/9", position: "relative", background: "#000" }}>
+    <section id="caption-flow-em-acao" style={{ position: "relative", background: "#000", overflow: "hidden" }}>
+      {/* Vídeo de fundo */}
+      <div style={{ width: "100%", aspectRatio: "16/9", position: "relative" }}>
         <video
           src="/video-pagina-scrub.mp4"
           autoPlay
@@ -31,6 +17,29 @@ function MobileExpandSection() {
           playsInline
           style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
         />
+        {/* Overlay escuro para legibilidade */}
+        <div style={{
+          position: "absolute", inset: 0,
+          background: "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.6) 100%)",
+        }} />
+        {/* Título sobreposto */}
+        <div style={{
+          position: "absolute", inset: 0,
+          display: "flex", flexDirection: "column",
+          alignItems: "center", justifyContent: "center",
+          padding: "24px", textAlign: "center",
+        }}>
+          <p className="section-label" style={{ marginBottom: "8px" }}>Caption Flow em ação</p>
+          <h2 style={{
+            fontFamily: "'Space Grotesk', sans-serif",
+            fontSize: "clamp(1.3rem, 5.5vw, 2rem)",
+            fontWeight: 800, letterSpacing: "-0.03em",
+            color: "#fff", lineHeight: 1.2,
+          }}>
+            Expanda sua forma de criar legendas{" "}
+            <span className="orange-gradient-text">no Adobe Premiere</span>
+          </h2>
+        </div>
       </div>
     </section>
   )

@@ -167,21 +167,6 @@ export default function HeroSection() {
         >
           Premiere Pro 2026+ · macOS e Windows · Acesso vitalício
         </motion.p>
-
-        {/* Separador laranja mobile — ponta a ponta, fora do container */}
-        <div
-          className="md:hidden"
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: "100vw",
-            height: "5px",
-            background: "linear-gradient(90deg, #ff9063, #FF6D29)",
-            marginTop: "32px",
-          }}
-        />
       </div>
     </section>
   );

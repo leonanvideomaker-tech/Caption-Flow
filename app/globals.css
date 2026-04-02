@@ -30,7 +30,7 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: auto; }
+html { scroll-behavior: smooth; }
 
 body {
   background: var(--bg);
@@ -227,9 +227,9 @@ h1, h2, h3, h4 {
 @media (max-width: 768px) {
   .price-tag { font-size: 2.2rem; }
 
-  /* Hero — reduz padding topo */
-  .hero-section { min-height: 90vh !important; }
-  .hero-inner { padding-top: 56px !important; }
+  /* Hero — reduz tamanho em mobile */
+  .hero-section { min-height: auto !important; padding-bottom: 40px !important; }
+  .hero-inner { padding-top: 72px !important; }
   .hero-subtitle { font-size: 0.95rem !important; }
 
   /* Títulos — sem quebra forçada, fluem naturalmente */
