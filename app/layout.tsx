@@ -12,7 +12,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" style={{ scrollBehavior: "auto" }}>
+      <head>
+        {/* Força scroll no topo ao carregar — evita browser restaurar posição */}
+        <script dangerouslySetInnerHTML={{ __html: "if(history.scrollRestoration){history.scrollRestoration='manual';}window.scrollTo(0,0);window.addEventListener('load',function(){document.documentElement.style.scrollBehavior='smooth';});" }} />
+      </head>
       <body className="min-h-full">{children}</body>
     </html>
   );

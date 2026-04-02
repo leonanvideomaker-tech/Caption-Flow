@@ -58,8 +58,11 @@ export default function FuncionalidadesSection() {
             <br className="mobile-hide" />
             <span className="gradient-text">dentro do <span style={{ color: "#FF6D29" }}>Adobe Premiere</span>.</span>
           </h2>
-          <p className="text-[#a1a1a6] mx-auto" style={{ maxWidth: "500px" }}>
+          <p className="text-[#a1a1a6] mx-auto hidden md:block" style={{ maxWidth: "500px" }}>
             Passe o mouse sobre cada aba para explorar o que o Caption<span style={{ color: "#FF6D29" }}>Flow</span> faz por você.
+          </p>
+          <p className="text-[#a1a1a6] mx-auto md:hidden" style={{ maxWidth: "500px" }}>
+            Clique em cada card para explorar o que o Caption<span style={{ color: "#FF6D29" }}>Flow</span> faz por você.
           </p>
         </div>
 

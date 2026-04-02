@@ -3,12 +3,46 @@
 import { useEffect, useRef } from "react"
 import { useScroll, useTransform, motion } from "motion/react"
 
-export default function ExpandSection() {
+// Mobile: vídeo autoplay simples (iOS não suporta scrubbing por currentTime)
+function MobileExpandSection() {
+  return (
+    <section id="caption-flow-em-acao" style={{ background: "#0e0e0e", padding: "0" }}>
+      <div style={{ textAlign: "center", padding: "48px 24px 24px" }}>
+        <p className="section-label" style={{ marginBottom: "12px" }}>Caption Flow em ação</p>
+        <h2 style={{
+          fontFamily: "'Space Grotesk', sans-serif",
+          fontSize: "clamp(1.5rem, 6vw, 2.2rem)",
+          fontWeight: 800, letterSpacing: "-0.03em",
+          color: "#fff", lineHeight: 1.2, marginBottom: "8px",
+        }}>
+          Expanda sua forma de criar legendas{" "}
+          <span className="orange-gradient-text">no Adobe Premiere</span>
+        </h2>
+        <p style={{ color: "#adaaaa", fontSize: "0.9rem", lineHeight: 1.6, fontFamily: "'Inter', sans-serif", marginBottom: "24px" }}>
+          Veja o painel em ação.
+        </p>
+      </div>
+      <div style={{ width: "100%", aspectRatio: "16/9", position: "relative", background: "#000" }}>
+        <video
+          src="/video-pagina-scrub.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+        />
+      </div>
+    </section>
+  )
+}
+
+// Desktop: scrubbing por scroll
+function DesktopExpandSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const rafRef = useRef<number | null>(null)
-  const targetRef = useRef(0)   // tempo alvo (segundos)
-  const currentRef = useRef(0)  // tempo atual interpolado
+  const targetRef = useRef(0)
+  const currentRef = useRef(0)
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -25,20 +59,16 @@ export default function ExpandSection() {
     video.pause()
     video.currentTime = 0
 
-    // Aguarda metadados para ter duration
     const onReady = () => {
       if (!video.duration) return
 
-      // Atualiza target quando scroll muda
       const unsubscribe = scrollYProgress.on("change", (v) => {
         targetRef.current = v * video.duration
       })
 
-      // Loop de interpolação — lerp suave entre currentTime e target
       const tick = () => {
         const diff = targetRef.current - currentRef.current
         if (Math.abs(diff) > 0.01) {
-          // Fator 0.15 = 15% por frame — suficiente para parecer instantâneo
           currentRef.current += diff * 0.15
           video.currentTime = currentRef.current
         }
@@ -69,104 +99,45 @@ export default function ExpandSection() {
 
   return (
     <section id="caption-flow-em-acao" ref={sectionRef} className="expand-section" style={{ height: "350vh", position: "relative" }}>
-      <div
-        style={{
-          position: "sticky",
-          top: 0,
-          height: "100vh",
-          overflow: "hidden",
-          background: "#0e0e0e",
-        }}
-      >
-        {/* Vídeo otimizado para scrubbing — todos keyframes */}
+      <div style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden", background: "#0e0e0e" }}>
         <video
           ref={videoRef}
           src="/video-pagina-scrub.mp4"
           muted
           playsInline
           preload="auto"
-          // @ts-ignore — webkit-playsinline necessário para iOS
-          {...{ "webkit-playsinline": "true" }}
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            display: "block",
-          }}
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
         />
 
-        {/* Overlay fixo — bordas permanentes */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(to bottom, rgba(14,14,14,0.35) 0%, transparent 30%, transparent 60%, rgba(14,14,14,0.5) 100%)",
-            pointerEvents: "none",
-          }}
-        />
+        <div style={{
+          position: "absolute", inset: 0,
+          background: "linear-gradient(to bottom, rgba(14,14,14,0.35) 0%, transparent 30%, transparent 60%, rgba(14,14,14,0.5) 100%)",
+          pointerEvents: "none",
+        }} />
 
-        {/* Degradê escuro atrás do texto — some junto com ele */}
-        <motion.div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            height: "80%",
-            background:
-              "linear-gradient(to bottom, rgba(5,5,5,0.96) 0%, rgba(14,14,14,0.85) 30%, rgba(14,14,14,0.5) 60%, transparent 100%)",
-            pointerEvents: "none",
-            opacity: textOpacity,
-          }}
-        />
+        <motion.div style={{
+          position: "absolute", top: 0, left: 0, right: 0, height: "80%",
+          background: "linear-gradient(to bottom, rgba(5,5,5,0.96) 0%, rgba(14,14,14,0.85) 30%, rgba(14,14,14,0.5) 60%, transparent 100%)",
+          pointerEvents: "none", opacity: textOpacity,
+        }} />
 
-        <motion.div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            paddingTop: "88px",
-            textAlign: "center",
-            opacity: textOpacity,
-            y: textY,
-            pointerEvents: "none",
-          }}
-        >
-          <p className="section-label" style={{ marginBottom: "12px" }}>
-            Caption Flow em ação
-          </p>
-          <h2
-            style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: "clamp(1.7rem, 4.5vw, 3rem)",
-              fontWeight: 800,
-              letterSpacing: "-0.03em",
-              color: "#fff",
-              lineHeight: 1.2,
-              maxWidth: "640px",
-              margin: "0 auto",
-            }}
-          >
+        <motion.div style={{
+          position: "absolute", top: 0, left: 0, right: 0,
+          display: "flex", flexDirection: "column", alignItems: "center",
+          paddingTop: "88px", textAlign: "center",
+          opacity: textOpacity, y: textY, pointerEvents: "none",
+        }}>
+          <p className="section-label" style={{ marginBottom: "12px" }}>Caption Flow em ação</p>
+          <h2 style={{
+            fontFamily: "'Space Grotesk', sans-serif",
+            fontSize: "clamp(1.7rem, 4.5vw, 3rem)",
+            fontWeight: 800, letterSpacing: "-0.03em",
+            color: "#fff", lineHeight: 1.2, maxWidth: "640px", margin: "0 auto",
+          }}>
             Expanda sua forma de criar legendas{" "}
             <span className="orange-gradient-text">no Adobe Premiere</span>
           </h2>
-          <p
-            style={{
-              color: "#adaaaa",
-              fontSize: "0.95rem",
-              lineHeight: 1.65,
-              maxWidth: "420px",
-              margin: "12px auto 0",
-              fontFamily: "'Inter', sans-serif",
-            }}
-          >
+          <p style={{ color: "#adaaaa", fontSize: "0.95rem", lineHeight: 1.65, maxWidth: "420px", margin: "12px auto 0", fontFamily: "'Inter', sans-serif" }}>
             Role para ver o painel em ação.
           </p>
 
@@ -189,18 +160,24 @@ export default function ExpandSection() {
           </motion.div>
         </motion.div>
 
-        {/* Barra de progresso */}
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "2px", background: "rgba(255,255,255,0.06)" }}>
-          <motion.div
-            style={{
-              height: "100%",
-              background: "linear-gradient(90deg, #ff9063, #FF6D29)",
-              scaleX: scrollYProgress,
-              transformOrigin: "left",
-            }}
-          />
+          <motion.div style={{
+            height: "100%",
+            background: "linear-gradient(90deg, #ff9063, #FF6D29)",
+            scaleX: scrollYProgress,
+            transformOrigin: "left",
+          }} />
         </div>
       </div>
     </section>
+  )
+}
+
+export default function ExpandSection() {
+  return (
+    <>
+      <div className="md:hidden"><MobileExpandSection /></div>
+      <div className="hidden md:block"><DesktopExpandSection /></div>
+    </>
   )
 }
