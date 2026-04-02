@@ -3,43 +3,56 @@
 import { useEffect, useRef } from "react"
 import { useScroll, useTransform, motion } from "motion/react"
 
-// Mobile: vídeo como background com título sobreposto
+// Mobile: título fixo no topo + vídeo abaixo ocupando tela cheia
 function MobileExpandSection() {
   return (
     <section id="caption-flow-em-acao" style={{ position: "relative", background: "#000", overflow: "hidden" }}>
-      {/* Vídeo de fundo */}
-      <div style={{ width: "100%", aspectRatio: "16/9", position: "relative" }}>
+
+      {/* Título fixo no topo com degradê preto atrás */}
+      <div style={{
+        position: "relative", zIndex: 2,
+        background: "linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0.85) 70%, rgba(0,0,0,0) 100%)",
+        padding: "48px 24px 40px",
+        textAlign: "center",
+      }}>
+        <p className="section-label" style={{ marginBottom: "8px" }}>Caption Flow em ação</p>
+        <h2 style={{
+          fontFamily: "'Space Grotesk', sans-serif",
+          fontSize: "clamp(1.3rem, 5.5vw, 2rem)",
+          fontWeight: 800, letterSpacing: "-0.03em",
+          color: "#fff", lineHeight: 1.2,
+        }}>
+          Expanda sua forma de criar legendas{" "}
+          <span className="orange-gradient-text">no Adobe Premiere</span>
+        </h2>
+      </div>
+
+      {/* Vídeo maior — proporção 4:3 para ocupar mais tela */}
+      <div style={{ position: "relative", width: "100%", paddingBottom: "75%" /* 4:3 */ }}>
         <video
           src="/video-pagina-scrub.mp4"
           autoPlay
           muted
           loop
           playsInline
-          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+          style={{
+            position: "absolute", inset: 0,
+            width: "100%", height: "100%",
+            objectFit: "cover", display: "block",
+          }}
         />
-        {/* Overlay escuro para legibilidade */}
+        {/* Degradê no topo do vídeo para fundir com o título */}
         <div style={{
-          position: "absolute", inset: 0,
-          background: "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.6) 100%)",
+          position: "absolute", top: 0, left: 0, right: 0, height: "30%",
+          background: "linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%)",
+          pointerEvents: "none",
         }} />
-        {/* Título sobreposto */}
+        {/* Degradê na base */}
         <div style={{
-          position: "absolute", inset: 0,
-          display: "flex", flexDirection: "column",
-          alignItems: "center", justifyContent: "center",
-          padding: "24px", textAlign: "center",
-        }}>
-          <p className="section-label" style={{ marginBottom: "8px" }}>Caption Flow em ação</p>
-          <h2 style={{
-            fontFamily: "'Space Grotesk', sans-serif",
-            fontSize: "clamp(1.3rem, 5.5vw, 2rem)",
-            fontWeight: 800, letterSpacing: "-0.03em",
-            color: "#fff", lineHeight: 1.2,
-          }}>
-            Expanda sua forma de criar legendas{" "}
-            <span className="orange-gradient-text">no Adobe Premiere</span>
-          </h2>
-        </div>
+          position: "absolute", bottom: 0, left: 0, right: 0, height: "25%",
+          background: "linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%)",
+          pointerEvents: "none",
+        }} />
       </div>
     </section>
   )
