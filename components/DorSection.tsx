@@ -18,7 +18,7 @@ export default function DorSection() {
             style={{ fontSize: "clamp(1.8rem, 4vw, 2.8rem)", letterSpacing: "-0.02em", color: "#fff" }}
           >
             A cada entrega, você passa
-            <br className="mobile-hide" />
+            {" "}<br className="hidden md:block" />
             pelo mesmo inferno silencioso.
           </h2>
         </div>

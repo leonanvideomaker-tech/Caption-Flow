@@ -14,7 +14,7 @@ export default function CtaFinal() {
             style={{ fontSize: "clamp(1.8rem, 4.5vw, 3rem)", letterSpacing: "-0.03em" }}
           >
             Você vai legendar o próximo
-            <br className="mobile-hide" />
+            {" "}<br className="hidden md:block" />
             <span className="gradient-text">vídeo do mesmo jeito?</span>
           </h2>
           <p className="text-[#a1a1a6] mb-6 mx-auto leading-relaxed" style={{ maxWidth: "560px", fontSize: "1.05rem" }}>
