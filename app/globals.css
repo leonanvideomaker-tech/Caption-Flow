@@ -255,3 +255,12 @@ h1, h2, h3, h4 {
   .py-24 { padding-top: 4rem !important; padding-bottom: 4rem !important; }
   .py-28 { padding-top: 4.5rem !important; padding-bottom: 4.5rem !important; }
 }
+
+@media (max-width: 767px) {
+  .sp-toast-responsive {
+    left: 12px !important;
+    right: 12px !important;
+    max-width: none !important;
+    bottom: 16px !important;
+  }
+}

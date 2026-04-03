@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import SocialProofToast from "@/components/SocialProofToast";
 
 export const metadata: Metadata = {
   title: "Caption Flow — Legendas animadas em segundos no Premiere Pro",
@@ -24,7 +25,10 @@ export default function RootLayout({
           })();
         `}} />
       </head>
-      <body className="min-h-full">{children}</body>
+      <body className="min-h-full">
+        {children}
+        <SocialProofToast />
+      </body>
     </html>
   );
 }
