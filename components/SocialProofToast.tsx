@@ -142,7 +142,7 @@ export default function SocialProofToast() {
       aria-live="polite"
       style={{
         position: "fixed",
-        bottom: "24px",
+        bottom: "80px",
         left: "20px",
         zIndex: 9999,
         maxWidth: "300px",
