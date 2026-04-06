@@ -174,7 +174,9 @@ export default function OfertaSection() {
                   </li>
                 </ul>
                 <a
-                  href="#"
+                  href="https://pay.kiwify.com.br/FoI7aY5"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl py-3 text-sm font-semibold text-[#a1a1a6] transition-all"
                   style={{ border: "1px solid rgba(255,255,255,0.1)", background: "transparent" }}
                 >
@@ -246,7 +248,9 @@ export default function OfertaSection() {
                   {comboExtraItems.map((item, i) => <GreenCheck key={i} text={item} />)}
                 </ul>
                 <a
-                  href="#"
+                  href="https://pay.kiwify.com.br/ZBIgHVx"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl py-3.5 text-base font-semibold text-white transition-all hover:opacity-90 active:scale-95"
                   style={{ background: "linear-gradient(135deg,#ff9063,#FF6D29)" }}
                 >
