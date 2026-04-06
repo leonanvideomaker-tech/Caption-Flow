@@ -153,8 +153,8 @@ export default function OfertaSection() {
                 <div className="mt-4">
                   <div style={{ display: "flex", alignItems: "baseline", gap: "3px", lineHeight: 1 }}>
                     <span style={{ fontSize: "0.8rem", color: "#adaaaa", fontFamily: "'Inter', sans-serif" }}>12x de</span>
-                    <span style={{ fontSize: "2rem", fontWeight: 800, letterSpacing: "-0.03em", color: "#fff", fontFamily: "'Space Grotesk', sans-serif" }}>R$12</span>
-                    <span style={{ fontSize: "1rem", fontWeight: 700, color: "#fff", fontFamily: "'Space Grotesk', sans-serif" }}>,25</span>
+                    <span style={{ fontSize: "2rem", fontWeight: 800, letterSpacing: "-0.03em", color: "#fff", fontFamily: "'Space Grotesk', sans-serif" }}>R$15</span>
+                    <span style={{ fontSize: "1rem", fontWeight: 700, color: "#fff", fontFamily: "'Space Grotesk', sans-serif" }}>,20</span>
                   </div>
                   <p style={{ fontSize: "0.75rem", color: "#6e6e6e", marginTop: "4px", fontFamily: "'Inter', sans-serif" }}>
                     ou <span style={{ color: "#adaaaa", fontWeight: 500 }}>R$147</span> à vista
@@ -234,8 +234,8 @@ export default function OfertaSection() {
                 <div className="mt-4">
                   <div style={{ display: "flex", alignItems: "baseline", gap: "3px", lineHeight: 1 }}>
                     <span style={{ fontSize: "0.8rem", color: "#adaaaa", fontFamily: "'Inter', sans-serif" }}>12x de</span>
-                    <span style={{ fontSize: "2.8rem", fontWeight: 800, letterSpacing: "-0.04em", color: "#fff", fontFamily: "'Space Grotesk', sans-serif" }}>R$16</span>
-                    <span style={{ fontSize: "1.2rem", fontWeight: 700, color: "#fff", fontFamily: "'Space Grotesk', sans-serif" }}>,17</span>
+                    <span style={{ fontSize: "2.8rem", fontWeight: 800, letterSpacing: "-0.04em", color: "#fff", fontFamily: "'Space Grotesk', sans-serif" }}>R$20</span>
+                    <span style={{ fontSize: "1.2rem", fontWeight: 700, color: "#fff", fontFamily: "'Space Grotesk', sans-serif" }}>,06</span>
                   </div>
                   <p style={{ fontSize: "0.75rem", color: "#6e6e6e", marginTop: "4px", fontFamily: "'Inter', sans-serif" }}>
                     ou <span style={{ color: "#adaaaa", fontWeight: 500 }}>R$194</span> à vista

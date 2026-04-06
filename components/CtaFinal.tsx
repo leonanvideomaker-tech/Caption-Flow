@@ -23,7 +23,7 @@ export default function CtaFinal() {
             Mas toda hora gasta em legenda manual é uma hora a menos criando. É um projeto a menos entregue. É mais um vídeo com acabamento que não reflete o seu nível.
           </p>
           <p className="text-white font-semibold mb-10" style={{ fontSize: "1.1rem" }}>
-            Por <strong style={{ color: "#FF6D29" }}>12x de R$16,17</strong>, você para de perder tempo com isso hoje.
+            Por <strong style={{ color: "#FF6D29" }}>12x de R$20,06</strong>, você para de perder tempo com isso hoje.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a href="#offer" className="btn-primary" style={{ fontSize: "1.05rem", padding: "16px 36px" }}>
