@@ -1,28 +1,63 @@
 "use client";
 
-// Placeholders até os prints chegarem — estrutura pronta para substituição
-const provas = [
-  {
-    nome: "Pedro Alves",
-    cargo: "Editor de Vídeo",
-    texto: "Fiz 200 legendas em menos de 1 minuto. Não acreditei até ver na timeline.",
-  },
-  {
-    nome: "Mariana Costa",
-    cargo: "Videomaker",
-    texto: "Nunca mais abri ferramenta externa para legenda. O workflow mudou completamente.",
-  },
-  {
-    nome: "Rafael Souza",
-    cargo: "Editor Profissional",
-    texto: "O acabamento ficou em outro nível. Cliente elogiou sem eu falar nada sobre.",
-  },
-  {
-    nome: "Camila Torres",
-    cargo: "Criadora de Conteúdo",
-    texto: "Economizo pelo menos 1h por vídeo. No mês, isso é muita hora de volta pra mim.",
-  },
+const feedbacks = [
+  { file: "/feedback-01.png", name: "feedback 01.png" },
+  { file: "/feedback-02.png", name: "feedback 02.png" },
 ];
+
+function FinderWindow({ src, filename }: { src: string; filename: string }) {
+  return (
+    <div style={{
+      borderRadius: "12px",
+      overflow: "hidden",
+      boxShadow: "0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08)",
+      background: "#1e1e1e",
+      fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif",
+      width: "100%",
+      maxWidth: "340px",
+    }}>
+      {/* Titlebar */}
+      <div style={{
+        background: "linear-gradient(180deg, #3a3a3a 0%, #2d2d2d 100%)",
+        padding: "10px 14px",
+        display: "flex",
+        alignItems: "center",
+        gap: "8px",
+        borderBottom: "1px solid rgba(0,0,0,0.4)",
+      }}>
+        {/* Traffic lights */}
+        <div style={{ display: "flex", gap: "6px", flexShrink: 0 }}>
+          <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "#FF5F57" }} />
+          <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "#FFBD2E" }} />
+          <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "#28CA41" }} />
+        </div>
+        {/* Filename */}
+        <span style={{
+          flex: 1,
+          textAlign: "center",
+          fontSize: "0.72rem",
+          color: "#b0b0b0",
+          letterSpacing: "0.01em",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
+          marginRight: "30px",
+        }}>
+          {filename}
+        </span>
+      </div>
+
+      {/* Screenshot */}
+      <div style={{ background: "#000", lineHeight: 0 }}>
+        <img
+          src={src}
+          alt={filename}
+          style={{ width: "100%", display: "block", objectFit: "cover" }}
+        />
+      </div>
+    </div>
+  );
+}
 
 export default function ProvasSociaisSection() {
   return (
@@ -38,46 +73,10 @@ export default function ProvasSociaisSection() {
           </h2>
         </div>
 
-        <div className="reveal grid grid-cols-1 md:grid-cols-2 gap-4">
-          {provas.map((p, i) => (
-            <div
-              key={i}
-              style={{
-                background: "rgba(255,255,255,0.9)",
-                backdropFilter: "blur(12px)",
-                WebkitBackdropFilter: "blur(12px)",
-                borderRadius: "14px",
-                padding: "24px",
-                border: "1px solid rgba(255,255,255,0.6)",
-                boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
-              }}
-            >
-              {/* Estrelas */}
-              <div style={{ marginBottom: "12px", display: "flex", gap: "3px" }}>
-                {[...Array(5)].map((_, s) => (
-                  <span key={s} style={{ color: "#FF6D29", fontSize: "0.9rem" }}>★</span>
-                ))}
-              </div>
-              <p style={{ color: "#1a1a1a", fontSize: "0.97rem", lineHeight: 1.7, fontStyle: "italic", marginBottom: "16px", fontFamily: "'Inter', sans-serif" }}>
-                "{p.texto}"
-              </p>
-              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                {/* Avatar placeholder */}
-                <div style={{
-                  width: "36px", height: "36px", borderRadius: "50%",
-                  background: "linear-gradient(135deg, #ff9063, #FF6D29)",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: "0.85rem", fontWeight: 700, color: "#fff",
-                  fontFamily: "'Space Grotesk', sans-serif",
-                  flexShrink: 0,
-                }}>
-                  {p.nome[0]}
-                </div>
-                <div>
-                  <p style={{ color: "#0e0e0e", fontWeight: 600, fontSize: "0.85rem", margin: 0, fontFamily: "'Space Grotesk', sans-serif" }}>{p.nome}</p>
-                  <p style={{ color: "#666", fontSize: "0.78rem", margin: 0, fontFamily: "'Inter', sans-serif" }}>{p.cargo}</p>
-                </div>
-              </div>
+        <div className="reveal flex flex-col md:flex-row gap-6 justify-center items-start">
+          {feedbacks.map((f, i) => (
+            <div key={i} className="flex justify-center w-full md:w-auto">
+              <FinderWindow src={f.file} filename={f.name} />
             </div>
           ))}
         </div>
