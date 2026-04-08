@@ -1,7 +1,7 @@
 "use client";
 
 const VIMEO_ID = "1181017978";
-const VIMEO_SRC = `https://player.vimeo.com/video/${VIMEO_ID}?autoplay=1&loop=1&autopause=0&muted=0&controls=1&title=0&byline=0&portrait=0&badge=0&dnt=1`;
+const VIMEO_SRC = `https://player.vimeo.com/video/${VIMEO_ID}?dnt=1`;
 
 export default function VideoAulaSection() {
   return (
