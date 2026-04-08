@@ -1,6 +1,7 @@
 "use client";
 
-const VIDEO_URL = "https://github.com/leonanvideomaker-tech/Caption-Flow/releases/download/v1.0-assets/video-aula.mp4";
+const VIMEO_ID = "1181017978";
+const VIMEO_SRC = `https://player.vimeo.com/video/${VIMEO_ID}?autoplay=1&loop=1&autopause=0&muted=0&controls=1&title=0&byline=0&portrait=0&badge=0&dnt=1`;
 
 export default function VideoAulaSection() {
   return (
@@ -23,43 +24,33 @@ export default function VideoAulaSection() {
         </span>
       </div>
 
-      {/* Mobile: ocupa tela toda */}
-      <div className="md:hidden" style={{ width: "100%", maxHeight: "100vh", overflow: "hidden", lineHeight: 0 }}>
-        <video
-          className="video-aula"
-          src={VIDEO_URL}
-          autoPlay
-          playsInline
-          loop
-          controls
-          controlsList="noplaybackrate nofullscreen nodownload noremoteplayback"
-          style={{
-            width: "100%",
-            maxHeight: "100vh",
-            objectFit: "cover",
-            display: "block",
-          }}
+      {/* Mobile: 16:9 full width */}
+      <div className="md:hidden" style={{ width: "100%", position: "relative", paddingBottom: "56.25%", lineHeight: 0 }}>
+        <iframe
+          src={VIMEO_SRC}
+          style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: "none" }}
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowFullScreen
         />
       </div>
 
-      {/* Desktop: proporcional, vídeo inteiro visível */}
+      {/* Desktop: centralizado, max 1100px */}
       <div className="hidden md:flex" style={{ justifyContent: "center", padding: "48px 24px" }}>
-        <video
-          className="video-aula"
-          src={VIDEO_URL}
-          autoPlay
-          playsInline
-          loop
-          controls
-          controlsList="noplaybackrate nofullscreen nodownload noremoteplayback"
-          style={{
-            width: "100%",
-            maxWidth: "1100px",
-            borderRadius: "16px",
-            boxShadow: "0 24px 80px rgba(0,0,0,0.6)",
-            display: "block",
-          }}
-        />
+        <div style={{ width: "100%", maxWidth: "1100px", position: "relative", paddingBottom: "calc(56.25% * 1100 / 1100)", aspectRatio: "16/9" }}>
+          <iframe
+            src={VIMEO_SRC}
+            style={{
+              width: "100%",
+              height: "100%",
+              border: "none",
+              borderRadius: "16px",
+              boxShadow: "0 24px 80px rgba(0,0,0,0.6)",
+              display: "block",
+            }}
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
       </div>
     </section>
   );
