@@ -27,7 +27,7 @@ const faqs = [
   },
   {
     q: "Como vou receber o acesso?",
-    a: "Imediatamente após a compra, você recebe pelo e-mail e pela Hotmart o link de download da extensão + uma videoaula passo a passo explicando como instalar e utilizar.",
+    a: "Imediatamente após a compra, você recebe pelo e-mail e pela Kiwify o link de download da extensão + uma videoaula passo a passo explicando como instalar e utilizar.",
   },
 ];
 
