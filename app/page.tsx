@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ExpandSection from "@/components/ExpandSection";
+import VideoAulaSection from "@/components/VideoAulaSection";
 import MarqueeRibbon from "@/components/MarqueeRibbon";
 import DorSection from "@/components/DorSection";
 import OQueESection from "@/components/OQueESection";
@@ -22,6 +23,7 @@ export default function Home() {
       <Navbar />
       <main>
         <HeroSection />
+        <VideoAulaSection />
         <ExpandSection />
         <MarqueeRibbon />
         <DorSection />

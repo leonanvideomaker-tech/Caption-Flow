@@ -264,3 +264,14 @@ h1, h2, h3, h4 {
     bottom: 72px !important;
   }
 }
+
+/* ── VideoAula: esconde tudo exceto play/pause ── */
+video.video-aula::-webkit-media-controls-timeline { display: none !important; }
+video.video-aula::-webkit-media-controls-current-time-display { display: none !important; }
+video.video-aula::-webkit-media-controls-time-remaining-display { display: none !important; }
+video.video-aula::-webkit-media-controls-mute-button { display: none !important; }
+video.video-aula::-webkit-media-controls-volume-slider { display: none !important; }
+video.video-aula::-webkit-media-controls-fullscreen-button { display: none !important; }
+video.video-aula::-webkit-media-controls-overflow-button { display: none !important; }
+video.video-aula::-webkit-media-controls-enclosure { background: transparent !important; }
+video.video-aula::-webkit-media-controls-panel { background: linear-gradient(transparent, rgba(0,0,0,0.4)) !important; justify-content: center !important; }
