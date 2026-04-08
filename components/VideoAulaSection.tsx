@@ -1,5 +1,7 @@
 "use client";
 
+const VIDEO_URL = "https://github.com/leonanvideomaker-tech/Caption-Flow/releases/download/v1.0-assets/video-aula.mp4";
+
 export default function VideoAulaSection() {
   return (
     <section style={{ background: "#0e0e0e" }}>
@@ -25,7 +27,7 @@ export default function VideoAulaSection() {
       <div className="md:hidden" style={{ width: "100%", maxHeight: "100vh", overflow: "hidden", lineHeight: 0 }}>
         <video
           className="video-aula"
-          src="/video-aula.mp4"
+          src={VIDEO_URL}
           autoPlay
           playsInline
           loop
@@ -44,7 +46,7 @@ export default function VideoAulaSection() {
       <div className="hidden md:flex" style={{ justifyContent: "center", padding: "48px 24px" }}>
         <video
           className="video-aula"
-          src="/video-aula.mp4"
+          src={VIDEO_URL}
           autoPlay
           playsInline
           loop
