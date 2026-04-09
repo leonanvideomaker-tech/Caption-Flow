@@ -1,8 +1,11 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
+
 const feedbacks = [
   { file: "/feedback-01.png", name: "feedback 01.png" },
   { file: "/feedback-02.png", name: "feedback 02.png" },
+  { file: "/feedback-03.png", name: "feedback 3.png" },
 ];
 
 function FinderWindow({ src, filename }: { src: string; filename: string }) {
@@ -14,7 +17,6 @@ function FinderWindow({ src, filename }: { src: string; filename: string }) {
       background: "#1e1e1e",
       fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif",
       width: "100%",
-      maxWidth: "340px",
     }}>
       {/* Titlebar */}
       <div style={{
@@ -25,13 +27,11 @@ function FinderWindow({ src, filename }: { src: string; filename: string }) {
         gap: "8px",
         borderBottom: "1px solid rgba(0,0,0,0.4)",
       }}>
-        {/* Traffic lights */}
         <div style={{ display: "flex", gap: "6px", flexShrink: 0 }}>
           <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "#FF5F57" }} />
           <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "#FFBD2E" }} />
           <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "#28CA41" }} />
         </div>
-        {/* Filename */}
         <span style={{
           flex: 1,
           textAlign: "center",
@@ -46,14 +46,63 @@ function FinderWindow({ src, filename }: { src: string; filename: string }) {
           {filename}
         </span>
       </div>
-
-      {/* Screenshot */}
       <div style={{ background: "#000", lineHeight: 0 }}>
-        <img
-          src={src}
-          alt={filename}
-          style={{ width: "100%", display: "block", objectFit: "cover" }}
-        />
+        <img src={src} alt={filename} style={{ width: "100%", display: "block", objectFit: "cover" }} />
+      </div>
+    </div>
+  );
+}
+
+function MobileCarousel() {
+  const [current, setCurrent] = useState(0);
+  const [animating, setAnimating] = useState(false);
+  const [direction, setDirection] = useState<"in" | "out">("in");
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    function scheduleNext() {
+      timerRef.current = setTimeout(() => {
+        // fade out
+        setDirection("out");
+        setAnimating(true);
+        setTimeout(() => {
+          setCurrent(prev => (prev + 1) % feedbacks.length);
+          setDirection("in");
+          setAnimating(false);
+          scheduleNext();
+        }, 500);
+      }, 5000); // 5s visível antes de trocar
+    }
+    scheduleNext();
+    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
+  }, []);
+
+  return (
+    <div style={{ width: "100%", maxWidth: "340px", margin: "0 auto" }}>
+      <div style={{
+        opacity: animating && direction === "out" ? 0 : 1,
+        transform: animating && direction === "out" ? "translateY(12px)" : "translateY(0)",
+        transition: "opacity 0.5s ease, transform 0.5s ease",
+      }}>
+        <FinderWindow src={feedbacks[current].file} filename={feedbacks[current].name} />
+      </div>
+
+      {/* Dots */}
+      <div style={{ display: "flex", justifyContent: "center", gap: "8px", marginTop: "16px" }}>
+        {feedbacks.map((_, i) => (
+          <div
+            key={i}
+            onClick={() => setCurrent(i)}
+            style={{
+              width: i === current ? "20px" : "8px",
+              height: "8px",
+              borderRadius: "4px",
+              background: i === current ? "#FF6D29" : "rgba(0,0,0,0.25)",
+              transition: "all 0.3s ease",
+              cursor: "pointer",
+            }}
+          />
+        ))}
       </div>
     </div>
   );
@@ -73,9 +122,15 @@ export default function ProvasSociaisSection() {
           </h2>
         </div>
 
-        <div className="reveal flex flex-col md:flex-row gap-6 justify-center items-start">
+        {/* Mobile: carrossel automático */}
+        <div className="md:hidden reveal">
+          <MobileCarousel />
+        </div>
+
+        {/* Desktop: 3 lado a lado */}
+        <div className="hidden md:flex reveal gap-5 justify-center items-start">
           {feedbacks.map((f, i) => (
-            <div key={i} className="flex justify-center w-full md:w-auto">
+            <div key={i} style={{ flex: "1", maxWidth: "320px" }}>
               <FinderWindow src={f.file} filename={f.name} />
             </div>
           ))}
