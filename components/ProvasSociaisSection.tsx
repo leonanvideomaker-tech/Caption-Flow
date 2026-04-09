@@ -55,35 +55,62 @@ function FinderWindow({ src, filename }: { src: string; filename: string }) {
 
 function MobileCarousel() {
   const [current, setCurrent] = useState(0);
-  const [animating, setAnimating] = useState(false);
-  const [direction, setDirection] = useState<"in" | "out">("in");
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [fading, setFading] = useState(false);
+  const timerRef   = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
 
+  function goTo(index: number) {
+    if (fading) return;
+    setFading(true);
+    if (timerRef.current) clearTimeout(timerRef.current);
+    setTimeout(() => {
+      setCurrent((index + feedbacks.length) % feedbacks.length);
+      setFading(false);
+      scheduleNext();
+    }, 400);
+  }
+
+  function scheduleNext() {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => goTo(current + 1), 5000);
+  }
+
+  // useEffect to keep scheduleNext in sync with current
   useEffect(() => {
-    function scheduleNext() {
-      timerRef.current = setTimeout(() => {
-        // fade out
-        setDirection("out");
-        setAnimating(true);
-        setTimeout(() => {
-          setCurrent(prev => (prev + 1) % feedbacks.length);
-          setDirection("in");
-          setAnimating(false);
-          scheduleNext();
-        }, 500);
-      }, 5000); // 5s visível antes de trocar
-    }
     scheduleNext();
     return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [current]);
+
+  function onTouchStart(e: React.TouchEvent) {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  }
+
+  function onTouchEnd(e: React.TouchEvent) {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    const dy = e.changedTouches[0].clientY - touchStartY.current;
+    // só detecta swipe horizontal se movimento horizontal > vertical
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+      goTo(dx < 0 ? current + 1 : current - 1);
+    }
+    touchStartX.current = null;
+    touchStartY.current = null;
+  }
 
   return (
     <div style={{ width: "100%", maxWidth: "340px", margin: "0 auto" }}>
-      <div style={{
-        opacity: animating && direction === "out" ? 0 : 1,
-        transform: animating && direction === "out" ? "translateY(12px)" : "translateY(0)",
-        transition: "opacity 0.5s ease, transform 0.5s ease",
-      }}>
+      <div
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+        style={{
+          opacity: fading ? 0 : 1,
+          transform: fading ? "translateY(10px)" : "translateY(0)",
+          transition: "opacity 0.4s ease, transform 0.4s ease",
+        }}
+      >
         <FinderWindow src={feedbacks[current].file} filename={feedbacks[current].name} />
       </div>
 
@@ -92,12 +119,12 @@ function MobileCarousel() {
         {feedbacks.map((_, i) => (
           <div
             key={i}
-            onClick={() => setCurrent(i)}
+            onClick={() => goTo(i)}
             style={{
               width: i === current ? "20px" : "8px",
               height: "8px",
               borderRadius: "4px",
-              background: i === current ? "#FF6D29" : "rgba(0,0,0,0.25)",
+              background: i === current ? "#000000" : "rgba(0,0,0,0.25)",
               transition: "all 0.3s ease",
               cursor: "pointer",
             }}
