@@ -92,9 +92,9 @@ export default function OfertaSection() {
             <div className="px-6 py-4" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
               <p className="text-xs font-semibold text-[#6e6e73] tracking-widest uppercase mb-3">O que você está recebendo</p>
               {[
-                { label: "Extensão Caption Flow (Premiere Pro 2026+)", value: "R$197" },
+                { label: "Extensão Caption Flow (Premiere Pro 2026+)", value: "R$297" },
                 { label: "Tutorial de instalação em vídeo", value: "R$97" },
-                { label: "Acesso vitalício + atualizações futuras", value: "R$97" },
+                { label: "Acesso vitalício + atualizações futuras", value: "R$147" },
               ].map((row, i) => (
                 <div key={i} className="flex items-center justify-between py-2" style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
                   <div className="flex items-center gap-2">
@@ -106,7 +106,7 @@ export default function OfertaSection() {
               ))}
               <div className="flex items-center justify-between pt-3 mt-1">
                 <span className="font-bold text-white" style={{ fontSize: "1rem" }}>Valor real</span>
-                <span className="font-bold line-through" style={{ fontSize: "1.1rem", color: "#FF3B30" }}>R$391</span>
+                <span className="font-bold line-through" style={{ fontSize: "1.1rem", color: "#FF3B30" }}>R$541</span>
               </div>
             </div>
             {/* Você paga hoje — fundo laranja */}
