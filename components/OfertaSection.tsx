@@ -10,6 +10,8 @@ const extensaoItems = [
   "Compatível com macOS e Windows",
   "Tutorial de instalação em vídeo passo a passo",
   "Garantia de 7 dias",
+  "Bônus — Vídeo aula sobre estilização de textos + presets para download",
+  "Bônus — Masterclass: Editando o Criativo Viral do Caption Flow",
 ];
 
 // Card 2: tudo do card 1 + Clean Animation Pack
@@ -92,21 +94,23 @@ export default function OfertaSection() {
             <div className="px-6 py-4" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
               <p className="text-xs font-semibold text-[#6e6e73] tracking-widest uppercase mb-3">O que você está recebendo</p>
               {[
-                { label: "Extensão Caption Flow (Premiere Pro 2026+)", value: "R$297" },
-                { label: "Tutorial de instalação em vídeo", value: "R$97" },
-                { label: "Acesso vitalício + atualizações futuras", value: "R$147" },
+                { label: "Extensão Caption Flow (Premiere Pro 2026+)", value: "R$297", bonus: false },
+                { label: "Tutorial de instalação em vídeo", value: "R$97", bonus: false },
+                { label: "Acesso vitalício + atualizações futuras", value: "R$147", bonus: false },
+                { label: "Bônus — Vídeo aula estilização + presets", value: "R$97", bonus: true },
+                { label: "Bônus — Masterclass Criativo Viral", value: "R$157", bonus: true },
               ].map((row, i) => (
                 <div key={i} className="flex items-center justify-between py-2" style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
                   <div className="flex items-center gap-2">
-                    <span style={{ fontSize: "1rem" }}>✅</span>
-                    <span className="text-sm text-[#a1a1a6]">{row.label}</span>
+                    <span style={{ fontSize: "1rem" }}>{row.bonus ? "⭐" : "✅"}</span>
+                    <span className="text-sm" style={{ color: row.bonus ? "#FF9063" : "#a1a1a6" }}>{row.label}</span>
                   </div>
                   <span className="text-sm font-semibold text-[#6e6e73] line-through">{row.value}</span>
                 </div>
               ))}
               <div className="flex items-center justify-between pt-3 mt-1">
                 <span className="font-bold text-white" style={{ fontSize: "1rem" }}>Valor real</span>
-                <span className="font-bold line-through" style={{ fontSize: "1.1rem", color: "#FF3B30" }}>R$541</span>
+                <span className="font-bold line-through" style={{ fontSize: "1.1rem", color: "#FF3B30" }}>R$795</span>
               </div>
             </div>
             {/* Você paga hoje — fundo laranja */}
