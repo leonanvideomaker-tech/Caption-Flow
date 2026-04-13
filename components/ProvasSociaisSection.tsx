@@ -6,6 +6,8 @@ const feedbacks = [
   { file: "/feedback-01.png", name: "feedback 01.png" },
   { file: "/feedback-02.png", name: "feedback 02.png" },
   { file: "/feedback-03.png", name: "feedback 3.png" },
+  { file: "/feedback-04.png", name: "feedback 4.png" },
+  { file: "/feedback-05.png", name: "feedback 5.png" },
 ];
 
 function FinderWindow({ src, filename }: { src: string; filename: string }) {
@@ -154,13 +156,22 @@ export default function ProvasSociaisSection() {
           <MobileCarousel />
         </div>
 
-        {/* Desktop: 3 lado a lado */}
-        <div className="hidden md:flex reveal gap-5 justify-center items-start">
-          {feedbacks.map((f, i) => (
-            <div key={i} style={{ flex: "1", maxWidth: "320px" }}>
-              <FinderWindow src={f.file} filename={f.name} />
-            </div>
-          ))}
+        {/* Desktop: 3 em cima + 2 embaixo */}
+        <div className="hidden md:block reveal">
+          <div className="flex gap-5 justify-center items-start mb-5">
+            {feedbacks.slice(0, 3).map((f, i) => (
+              <div key={i} style={{ flex: "1", maxWidth: "300px" }}>
+                <FinderWindow src={f.file} filename={f.name} />
+              </div>
+            ))}
+          </div>
+          <div className="flex gap-5 justify-center items-start">
+            {feedbacks.slice(3).map((f, i) => (
+              <div key={i} style={{ flex: "1", maxWidth: "300px" }}>
+                <FinderWindow src={f.file} filename={f.name} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

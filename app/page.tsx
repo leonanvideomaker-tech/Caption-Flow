@@ -9,6 +9,7 @@ import FuncionalidadesSection from "@/components/FuncionalidadesSection";
 import ComoFuncionaSection from "@/components/ComoFuncionaSection";
 import BeneficiosSection from "@/components/BeneficiosSection";
 import QuemSouEuSection from "@/components/QuemSouEuSection";
+import OQueVaiReceberSection from "@/components/OQueVaiReceberSection";
 import ProvasSociaisSection from "@/components/ProvasSociaisSection";
 import OfertaSection from "@/components/OfertaSection";
 import FaqSection from "@/components/FaqSection";
@@ -32,6 +33,7 @@ export default function Home() {
         <ComoFuncionaSection />
         <BeneficiosSection />
         <QuemSouEuSection />
+        <OQueVaiReceberSection />
         <ProvasSociaisSection />
         <OfertaSection />
         <FaqSection />
