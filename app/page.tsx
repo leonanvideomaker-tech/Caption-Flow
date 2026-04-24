@@ -1,45 +1,41 @@
-import Navbar from "@/components/Navbar";
-import HeroSection from "@/components/HeroSection";
-import ExpandSection from "@/components/ExpandSection";
-import VideoAulaSection from "@/components/VideoAulaSection";
-import MarqueeRibbon from "@/components/MarqueeRibbon";
-import DorSection from "@/components/DorSection";
-import OQueESection from "@/components/OQueESection";
-import FuncionalidadesSection from "@/components/FuncionalidadesSection";
-import ComoFuncionaSection from "@/components/ComoFuncionaSection";
-import BeneficiosSection from "@/components/BeneficiosSection";
-import QuemSouEuSection from "@/components/QuemSouEuSection";
-import OQueVaiReceberSection from "@/components/OQueVaiReceberSection";
-import ProvasSociaisSection from "@/components/ProvasSociaisSection";
-import OfertaSection from "@/components/OfertaSection";
-import FaqSection from "@/components/FaqSection";
-import CtaFinal from "@/components/CtaFinal";
-import Footer from "@/components/Footer";
-import RevealInit from "@/components/RevealInit";
-
 export default function Home() {
   return (
-    <>
-      <RevealInit />
-      <Navbar />
-      <main>
-        <HeroSection />
-        <VideoAulaSection />
-        <ExpandSection />
-        <MarqueeRibbon />
-        <DorSection />
-        <OQueESection />
-        <FuncionalidadesSection />
-        <ComoFuncionaSection />
-        <BeneficiosSection />
-        <QuemSouEuSection />
-        <OQueVaiReceberSection />
-        <ProvasSociaisSection />
-        <OfertaSection />
-        <FaqSection />
-        <CtaFinal />
-      </main>
-      <Footer />
-    </>
+    <main
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#0a0a0a",
+        fontFamily: "sans-serif",
+        padding: "2rem",
+        textAlign: "center",
+      }}
+    >
+      <div>
+        <p style={{ fontSize: "3rem", marginBottom: "1.5rem" }}>🔧</p>
+        <h1
+          style={{
+            fontSize: "1.75rem",
+            fontWeight: 700,
+            color: "#ffffff",
+            marginBottom: "1rem",
+            lineHeight: 1.4,
+          }}
+        >
+          Site passando por reforma
+        </h1>
+        <p
+          style={{
+            fontSize: "1.1rem",
+            color: "#aaaaaa",
+            maxWidth: "480px",
+            lineHeight: 1.6,
+          }}
+        >
+          Estou atualizando o site agora. Volte em breve!
+        </p>
+      </div>
+    </main>
   );
 }
