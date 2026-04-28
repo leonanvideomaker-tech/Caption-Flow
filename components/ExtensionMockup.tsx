@@ -59,6 +59,18 @@ const MOGRTS = [
 
 function MogrtGrid() {
   const [selected, setSelected] = useState<string | null>(null);
+  const [hoveredVideo, setHoveredVideo] = useState<string | null>(null);
+  const videoRefs = useRef<Record<string, HTMLVideoElement | null>>({});
+
+  function onEnter(name: string) {
+    setHoveredVideo(name);
+    videoRefs.current[name]?.play();
+  }
+  function onLeave(name: string) {
+    setHoveredVideo(null);
+    const v = videoRefs.current[name];
+    if (v) { v.pause(); v.currentTime = 0; }
+  }
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
@@ -67,17 +79,34 @@ function MogrtGrid() {
           <div
             key={m.name}
             onClick={() => setSelected(m.name)}
+            onMouseEnter={() => onEnter(m.name)}
+            onMouseLeave={() => onLeave(m.name)}
             style={{
               borderRadius: 5, overflow: "hidden", cursor: "pointer", position: "relative",
-              border: `1px solid ${selected === m.name ? "rgba(255,109,41,0.6)" : "#222"}`,
+              border: `1px solid ${selected === m.name ? "rgba(255,109,41,0.6)" : hoveredVideo === m.name ? "rgba(255,109,41,0.3)" : "#222"}`,
               background: "#111", transition: "border-color 0.15s",
             }}
           >
             <video
+              ref={(el) => { videoRefs.current[m.name] = el; }}
               src={m.src}
-              autoPlay muted loop playsInline preload="auto"
+              muted loop playsInline preload="none"
               style={{ width: "100%", display: "block", aspectRatio: "16/9", objectFit: "cover" }}
             />
+            {hoveredVideo !== m.name && (
+              <div style={{
+                position: "absolute", inset: 0, background: "rgba(0,0,0,0.5)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}>
+                <div style={{
+                  width: 20, height: 20, borderRadius: "50%",
+                  background: selected === m.name ? "rgba(255,109,41,1)" : "rgba(255,109,41,0.75)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                }}>
+                  <span style={{ color: "#fff", fontSize: 8, marginLeft: 1 }}>▶</span>
+                </div>
+              </div>
+            )}
             <div style={{ padding: "3px 4px", fontSize: 8.5, color: "#777", background: "#0e0e0e", lineHeight: 1.3 }}>
               {m.name}
             </div>
@@ -100,17 +129,48 @@ function MogrtGrid() {
 // ─── Template video card ──────────────────────────────────────────────
 
 function TemplateVideoCard({ name, src }: { name: string; src: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [hovered, setHovered] = useState(false);
+
+  function onEnter() {
+    setHovered(true);
+    videoRef.current?.play();
+  }
+  function onLeave() {
+    setHovered(false);
+    if (videoRef.current) { videoRef.current.pause(); videoRef.current.currentTime = 0; }
+  }
+
   return (
-    <div style={{
-      borderRadius: 6, overflow: "hidden", cursor: "pointer", position: "relative",
-      border: "1px solid #222",
-      background: "#111",
-    }}>
+    <div
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
+      style={{
+        borderRadius: 6, overflow: "hidden", cursor: "pointer", position: "relative",
+        border: `1px solid ${hovered ? "rgba(255,109,41,0.4)" : "#222"}`,
+        transition: "border-color 0.2s",
+        background: "#111",
+      }}
+    >
       <video
+        ref={videoRef}
         src={src}
-        autoPlay muted loop playsInline preload="auto"
+        muted loop playsInline preload="none"
         style={{ width: "100%", display: "block", aspectRatio: "16/9", objectFit: "cover" }}
       />
+      {!hovered && (
+        <div style={{
+          position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center",
+          background: "rgba(0,0,0,0.45)",
+        }}>
+          <div style={{
+            width: 28, height: 28, borderRadius: "50%", background: "rgba(255,109,41,0.85)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }}>
+            <span style={{ color: "#fff", fontSize: 10, marginLeft: 2 }}>▶</span>
+          </div>
+        </div>
+      )}
       <div style={{ padding: "5px 6px", fontSize: 9.5, color: "#888", fontFamily: "'Space Grotesk', sans-serif", background: "#0e0e0e" }}>
         {name}
       </div>
