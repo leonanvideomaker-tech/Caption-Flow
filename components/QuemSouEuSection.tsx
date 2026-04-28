@@ -8,8 +8,8 @@ export default function QuemSouEuSection() {
 
         <div className="reveal flex flex-col md:flex-row gap-12 items-start">
           {/* Finder frame com foto */}
-          <div className="flex-shrink-0 mx-auto md:mx-0" style={{ width: "260px" }}>
-            <div className="mockup-frame" style={{ width: "260px" }}>
+          <div className="flex-shrink-0 mx-auto md:mx-0 quem-photo-wrap">
+            <div className="mockup-frame quem-mockup-frame">
               <div className="titlebar">
                 <div className="dot" style={{ background: "#FF5F57" }} />
                 <div className="dot" style={{ background: "#FFBD2E" }} />
@@ -66,6 +66,14 @@ export default function QuemSouEuSection() {
           </div>
         </div>
       </div>
+      <style>{`
+        .quem-photo-wrap { width: 260px; }
+        .quem-mockup-frame { width: 260px; }
+        @media (max-width: 768px) {
+          .quem-photo-wrap { width: 100% !important; max-width: 300px; }
+          .quem-mockup-frame { width: 100% !important; }
+        }
+      `}</style>
     </section>
   );
 }

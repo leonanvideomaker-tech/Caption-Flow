@@ -1,6 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'TASAOrbiter';
+  src: url('/fonts/TASAOrbiter-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TASAOrbiter';
+  src: url('/fonts/TASAOrbiter-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'TASAOrbiter';
+  src: url('/fonts/TASAOrbiter-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-display: swap;
+}
+
 :root {
   /* Cores — The Neon Curator */
   --primary: #FF6D29;
@@ -254,6 +273,18 @@ h1, h2, h3, h4 {
   /* Seções — padding vertical menor */
   .py-24 { padding-top: 4rem !important; padding-bottom: 4rem !important; }
   .py-28 { padding-top: 4.5rem !important; padding-bottom: 4.5rem !important; }
+
+  /* Impede overflow horizontal global */
+  body { overflow-x: hidden; }
+
+  /* Textos grandes — reduz no mobile */
+  .font-extrabold, .font-bold { word-break: keep-all; }
+
+  /* Botão CTA — full width no mobile */
+  .btn-primary { display: block !important; text-align: center !important; }
+
+  /* OQueESection cards — padding menor */
+  .max-w-2xl { max-width: 100% !important; }
 }
 
 @media (max-width: 767px) {

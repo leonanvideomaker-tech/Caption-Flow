@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import SocialProofToast from "@/components/SocialProofToast";
 
@@ -15,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
-        <script dangerouslySetInnerHTML={{ __html: `
+        <Script id="scroll-restoration" strategy="beforeInteractive">{`
           (function(){
             try {
               if ('scrollRestoration' in history) {
@@ -23,7 +24,7 @@ export default function RootLayout({
               }
             } catch(e){}
           })();
-        `}} />
+        `}</Script>
       </head>
       <body className="min-h-full">
         {children}

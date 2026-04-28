@@ -2,40 +2,70 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { VerticalCutReveal } from "@/components/ui/vertical-cut-reveal";
+import { Check } from "lucide-react";
 
-// Card 1: extensão + acesso vitalício, SEM Clean Animation Pack
-const extensaoItems = [
-  "Extensão Caption Flow para Adobe Premiere Pro",
-  "Acesso vitalício + atualizações futuras",
-  "Compatível com macOS e Windows",
-  "Tutorial de instalação em vídeo passo a passo",
-  "Garantia de 7 dias",
-  "Bônus — Vídeo aula sobre estilização de textos + presets para download",
-  "Bônus — Masterclass: Editando o Criativo Viral do Caption Flow",
+const ITEMS = [
+  { label: "Caption Flow Basic — legendas essenciais no Premiere", bonus: false },
+  { label: "Caption Flow Pro — recursos avançados + SFX + templates", bonus: false },
+  { label: "Vídeo aulas passo a passo", bonus: false },
+  { label: "Acesso vitalício + atualizações futuras", bonus: false },
+  { label: "Suporte 100% humano com o próprio criador", bonus: false },
+  { label: "Bônus — Vídeo aula estilização + presets", bonus: true },
+  { label: "Bônus — Masterclass Criativo Viral do Caption Flow", bonus: true },
 ];
 
-// Card 2: tudo do card 1 + Clean Animation Pack
-const comboExtraItems = [
-  "Clean Animation Pack — 15 templates .mogrt estética Apple",
+const ANCHOR_ROWS = [
+  { label: "Caption Flow Basic", value: "R$147", bonus: false },
+  { label: "Caption Flow Pro (Premiere 2026+)", value: "R$297", bonus: false },
+  { label: "Vídeo aulas passo a passo", value: "R$97", bonus: false },
+  { label: "Acesso vitalício + atualizações futuras", value: "Imensurável", bonus: false, priceless: true },
+  { label: "Suporte 100% humano com o próprio criador", value: "Imensurável", bonus: false, priceless: true },
+  { label: "Bônus — Vídeo aula estilização + presets", value: "R$97", bonus: true },
+  { label: "Bônus — Masterclass Criativo Viral", value: "R$157", bonus: true },
 ];
 
-const revealVariants = {
-  hidden: { filter: "blur(8px)", y: -16, opacity: 0 },
-  visible: (i: number) => ({
-    y: 0, opacity: 1, filter: "blur(0px)",
-    transition: { delay: i * 0.15, duration: 0.5 },
-  }),
-};
+const AVATARS = [
+  "/avatars/avatar-pedro.png",
+  "/avatars/avatar-bryan.png",
+  "/avatars/avatar-gleisson.png",
+  "/avatars/avatar-diego.png",
+  "/avatars/avatar-jammal.png",
+];
 
-function GreenCheck({ text }: { text: string }) {
+function AvatarStack() {
   return (
-    <li className="flex items-start gap-3 text-sm" style={{ color: "#e5e5e7" }}>
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ flexShrink: 0, marginTop: "1px" }}>
-        <circle cx="9" cy="9" r="9" fill="rgba(52,199,89,0.15)" />
-        <path d="M5.5 9l2.5 2.5 4.5-4.5" stroke="#34C759" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-      <span>{text}</span>
-    </li>
+    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+      <div style={{ display: "flex" }}>
+        {AVATARS.map((src, i) => (
+          <div
+            key={i}
+            style={{
+              width: 32, height: 32,
+              borderRadius: "50%",
+              border: "2px solid #fff",
+              overflow: "hidden",
+              marginLeft: i > 0 ? -10 : 0,
+              zIndex: 5 - i,
+              position: "relative",
+              background: "#1a1a1a",
+              flexShrink: 0,
+            }}
+          >
+            <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+          </div>
+        ))}
+      </div>
+      <p style={{
+        fontFamily: "'TASAOrbiter', sans-serif",
+        fontSize: "0.78rem",
+        color: "rgba(255,255,255,0.45)",
+        margin: 0,
+        lineHeight: 1.45,
+      }}>
+        <strong style={{ color: "rgba(255,255,255,0.8)", fontWeight: 600 }}>100+</strong>{" "}
+        editores já usam o Caption Flow.
+      </p>
+    </div>
   );
 }
 
@@ -50,19 +80,19 @@ export default function OfertaSection() {
       className="py-24 px-6 relative"
       style={{ background: "#000" }}
     >
-      {/* Grid sutil de fundo */}
+      {/* Grid background */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
             "linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px)",
           backgroundSize: "40px 40px",
-          WebkitMaskImage: "radial-gradient(ellipse 70% 70% at 50% 50%, #000 60%, transparent 100%)",
-          maskImage: "radial-gradient(ellipse 70% 70% at 50% 50%, #000 60%, transparent 100%)",
+          WebkitMaskImage: "radial-gradient(ellipse 80% 80% at 50% 50%, #000 60%, transparent 100%)",
+          maskImage: "radial-gradient(ellipse 80% 80% at 50% 50%, #000 60%, transparent 100%)",
         }}
       />
 
-      <div className="max-w-5xl mx-auto relative">
+      <div className="max-w-3xl mx-auto relative">
         {/* Heading */}
         <div className="text-center mb-14">
           <p className="section-label">Oferta</p>
@@ -85,194 +115,375 @@ export default function OfertaSection() {
           </p>
         </div>
 
-        {/* Tabela de ancoragem */}
-        <div className="reveal mb-12 mx-auto" style={{ maxWidth: "520px" }}>
-          <div
-            className="rounded-2xl overflow-hidden"
-            style={{ border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.02)" }}
-          >
-            <div className="px-6 py-4" style={{ borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-              <p className="text-xs font-semibold text-[#6e6e73] tracking-widest uppercase mb-3">O que você está recebendo</p>
-              {[
-                { label: "Extensão Caption Flow (Premiere Pro 2026+)", value: "R$297", bonus: false },
-                { label: "Tutorial de instalação em vídeo", value: "R$97", bonus: false },
-                { label: "Acesso vitalício + atualizações futuras", value: "R$147", bonus: false },
-                { label: "Bônus — Vídeo aula estilização + presets", value: "R$97", bonus: true },
-                { label: "Bônus — Masterclass Criativo Viral", value: "R$157", bonus: true },
-              ].map((row, i) => (
-                <div key={i} className="flex items-center justify-between py-2" style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
-                  <div className="flex items-center gap-2">
-                    <span style={{ fontSize: "1rem" }}>{row.bonus ? "⭐" : "✅"}</span>
-                    <span className="text-sm" style={{ color: row.bonus ? "#FF9063" : "#a1a1a6" }}>{row.label}</span>
-                  </div>
-                  <span className="text-sm font-semibold text-[#6e6e73] line-through">{row.value}</span>
+        {/* Anchor table */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-8 rounded-2xl overflow-hidden"
+          style={{ border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.02)" }}
+        >
+          <div className="px-6 py-5">
+            <p className="text-xs font-semibold text-[#6e6e73] tracking-widest uppercase mb-4">
+              O que você está recebendo
+            </p>
+            {ANCHOR_ROWS.map((row, i) => (
+              <div
+                key={i}
+                className="flex items-center justify-between py-2.5"
+                style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}
+              >
+                <div className="flex items-center gap-2">
+                  <span style={{ fontSize: "0.9rem" }}>{row.bonus ? "⭐" : "✅"}</span>
+                  <span className="text-sm" style={{ color: row.bonus ? "#FF9063" : "#a1a1a6" }}>{row.label}</span>
                 </div>
-              ))}
-              <div className="flex items-center justify-between pt-3 mt-1">
-                <span className="font-bold text-white" style={{ fontSize: "1rem" }}>Valor real</span>
-                <span className="font-bold line-through" style={{ fontSize: "1.1rem", color: "#FF3B30" }}>R$795</span>
+                <span
+                  className="text-sm font-semibold ml-4 shrink-0"
+                  style={{
+                    color: row.priceless ? "#34C759" : "#6e6e73",
+                    textDecoration: row.priceless ? "none" : "line-through",
+                  }}
+                >
+                  {row.value}
+                </span>
               </div>
-            </div>
-            {/* Você paga hoje — fundo laranja */}
-            <div
-              className="px-6 py-5 flex items-center justify-between"
-              style={{ background: "linear-gradient(135deg, #ff9063, #FF6D29)" }}
-            >
-              <span className="font-bold text-white" style={{ fontSize: "1rem" }}>Você paga hoje</span>
-              <span style={{ fontSize: "2rem" }}>👇</span>
+            ))}
+            <div className="flex items-center justify-between pt-3 mt-1">
+              <span className="font-bold text-white">Valor real</span>
+              <span className="font-bold line-through" style={{ color: "#FF3B30" }}>R$795</span>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Cards */}
-        <div className="flex flex-col md:flex-row items-stretch justify-center gap-5">
-
-          {/* Card 1 — Somente a Extensão (aparece 2º no mobile) */}
-          <motion.div
-            custom={1}
-            variants={revealVariants}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            className="flex flex-col order-2 md:order-1"
-            style={{
-              flex: "0 0 auto",
-              width: "100%",
-              maxWidth: "320px",
-              margin: "0 auto",
-            }}
-          >
-            <div
-              className="flex flex-col h-full rounded-2xl overflow-hidden"
-              style={{ border: "1px solid rgba(255,255,255,0.08)" }}
-            >
-              <div
-                className="px-6 py-5"
-                style={{ background: "rgba(255,255,255,0.03)", borderBottom: "1px solid rgba(255,255,255,0.06)" }}
-              >
-                <p style={{ fontSize: "0.72rem", color: "#6e6e73", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "8px" }}>
-                  Caption Flow
-                </p>
-                <h3 style={{ color: "#fff", fontWeight: 700, fontSize: "1.1rem", marginBottom: "2px" }}>Somente a Extensão</h3>
-                <p style={{ color: "#6e6e73", fontSize: "0.8rem" }}>Para quem já tem o Clean Animation Pack.</p>
-                <div className="mt-4">
-                  <div style={{ display: "flex", alignItems: "baseline", gap: "3px", lineHeight: 1 }}>
-                    <span style={{ fontSize: "0.8rem", color: "#adaaaa", fontFamily: "'Inter', sans-serif" }}>12x de</span>
-                    <span style={{ fontSize: "2rem", fontWeight: 800, letterSpacing: "-0.03em", color: "#fff", fontFamily: "'Space Grotesk', sans-serif" }}>R$15</span>
-                    <span style={{ fontSize: "1rem", fontWeight: 700, color: "#fff", fontFamily: "'Space Grotesk', sans-serif" }}>,20</span>
-                  </div>
-                  <p style={{ fontSize: "0.75rem", color: "#6e6e6e", marginTop: "4px", fontFamily: "'Inter', sans-serif" }}>
-                    ou <span style={{ color: "#adaaaa", fontWeight: 500 }}>R$147</span> à vista
-                  </p>
-                </div>
-              </div>
-              <div className="flex flex-col flex-1 px-6 py-5" style={{ background: "#0a0a0a" }}>
-                <ul className="flex flex-col gap-3 flex-1">
-                  {extensaoItems.map((item, i) => <GreenCheck key={i} text={item} />)}
-                  {/* Clean Animation Pack — não incluso */}
-                  <li className="flex items-start gap-3 text-sm" style={{ color: "#48484a" }}>
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ flexShrink: 0, marginTop: "1px" }}>
-                      <circle cx="9" cy="9" r="9" fill="rgba(255,255,255,0.04)" />
-                      <path d="M5.5 9l2.5 2.5 4.5-4.5" stroke="#3a3a3c" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    <span>Clean Animation Pack — 15 templates .mogrt estética Apple</span>
-                  </li>
-                </ul>
-                <a
-                  href="https://pay.kiwify.com.br/FoI7aY5"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl py-3 text-sm font-semibold text-[#a1a1a6] transition-all"
-                  style={{ border: "1px solid rgba(255,255,255,0.1)", background: "transparent" }}
-                >
-                  Quero a Extensão →
-                </a>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Card 2 — Combo Completo (aparece 1º no mobile) */}
-          <motion.div
-            custom={2}
-            variants={revealVariants}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            className="flex flex-col flex-1 relative order-1 md:order-2"
-            style={{ maxWidth: "480px", margin: "0 auto", width: "100%" }}
-          >
+        {/* ── BRIDGE BANNER ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.55, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-8 rounded-3xl overflow-hidden"
+          style={{ background: "#fff" }}
+        >
           <div
             style={{
-              height: "100%",
+              padding: "2.25rem 2.5rem",
               display: "flex",
               flexDirection: "column",
-              animation: inView ? "cardFloat 3.2s ease-in-out infinite" : "none",
+              alignItems: "center",
+              textAlign: "center",
+              gap: 8,
             }}
           >
-            {/* Badge */}
-            <div
-              style={{
-                position: "absolute", top: "-14px", left: "50%", transform: "translateX(-50%)",
-                background: "linear-gradient(135deg,#ff9063,#FF6D29)", color: "#fff", fontSize: "0.7rem", fontWeight: 700,
-                padding: "5px 18px", borderRadius: "100px", letterSpacing: "0.08em",
-                whiteSpace: "nowrap", zIndex: 10, fontFamily: "'Space Grotesk', sans-serif",
-              }}
-            >
-              ⭐ RECOMENDADO
+            <p style={{
+              fontFamily: "'TASAOrbiter', sans-serif",
+              fontSize: "0.7rem",
+              fontWeight: 600,
+              letterSpacing: "0.18em",
+              color: "#FF6D29",
+              textTransform: "uppercase",
+            }}>
+              Promoção de lançamento · Por tempo limitado
+            </p>
+            <p style={{
+              fontFamily: "'TASAOrbiter', sans-serif",
+              fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)",
+              fontWeight: 700,
+              color: "#1a1a1a",
+              lineHeight: 1.25,
+              margin: 0,
+            }}>
+              Você pagaria{" "}
+              <span style={{ textDecoration: "line-through", color: "#bbb" }}>R$297</span>
+              , mas hoje você vai pagar apenas:
+            </p>
+
+            {/* Primary: installment */}
+            <div style={{ marginTop: 8, display: "flex", alignItems: "baseline", gap: 6 }}>
+              {/* 12x — proportional to main number */}
+              <span style={{
+                fontFamily: "'Space Grotesk', sans-serif",
+                fontSize: "2.2rem",
+                fontWeight: 800,
+                color: "#FF6D29",
+                letterSpacing: "-0.03em",
+                lineHeight: 1,
+                alignSelf: "flex-end",
+                marginBottom: 4,
+              }}>12x</span>
+
+              {/* R$ 25,55 */}
+              <div style={{ display: "flex", alignItems: "baseline", gap: 2, lineHeight: 1 }}>
+                <span style={{
+                  fontFamily: "'Space Grotesk', sans-serif",
+                  fontSize: "1.1rem",
+                  fontWeight: 700,
+                  color: "#FF6D29",
+                  alignSelf: "flex-start",
+                  marginTop: 6,
+                }}>R$</span>
+                <span style={{
+                  fontFamily: "'Space Grotesk', sans-serif",
+                  fontSize: "5rem",
+                  fontWeight: 800,
+                  letterSpacing: "-0.04em",
+                  color: "#FF6D29",
+                  lineHeight: 1,
+                }}>25</span>
+                <span style={{
+                  fontFamily: "'Space Grotesk', sans-serif",
+                  fontSize: "2.2rem",
+                  fontWeight: 700,
+                  color: "#FF6D29",
+                  lineHeight: 1,
+                  alignSelf: "flex-end",
+                  marginBottom: 4,
+                }}>,55</span>
+              </div>
             </div>
 
+            {/* Secondary: lump sum */}
+            <p style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "0.9rem",
+              color: "#888",
+              margin: 0,
+            }}>
+              ou <span style={{ color: "#1a1a1a", fontWeight: 700 }}>R$247</span> à vista · Preço sobe em breve
+            </p>
+          </div>
+
+          {/* Orange divider stripe */}
+          <div style={{ height: 4, background: "linear-gradient(90deg, #ff9063, #FF6D29)" }} />
+        </motion.div>
+
+        {/* ── TWO-COLUMN OFFER CARD ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="relative"
+          style={{ paddingTop: 18 }}
+        >
+          {/* Launch badge — outside overflow-hidden wrapper */}
+          <div style={{
+            position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)",
+            background: "linear-gradient(135deg, #ff9063, #FF6D29)",
+            color: "#fff", fontSize: "0.68rem", fontWeight: 700,
+            padding: "5px 20px", borderRadius: 100, letterSpacing: "0.08em",
+            whiteSpace: "nowrap", zIndex: 10,
+            fontFamily: "'Space Grotesk', sans-serif",
+          }}>
+            ✦ LANÇAMENTO — OFERTA POR TEMPO LIMITADO
+          </div>
+
+          <div
+            className="oferta-card-grid"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              background: "rgba(10,10,10,0.95)",
+              border: "1.5px solid rgba(255,109,41,0.5)",
+              boxShadow: "0 0 60px rgba(255,109,41,0.15)",
+              borderRadius: 24,
+              overflow: "hidden",
+            }}
+          >
+            {/* LEFT: price + CTA */}
             <div
-              className="flex flex-col h-full rounded-2xl overflow-hidden"
-              style={{ border: "1.5px solid rgba(255,109,41,0.6)", boxShadow: "0 0 40px rgba(255,109,41,0.18)" }}
+              style={{
+                padding: "3rem 2.5rem",
+                borderRight: "1px solid rgba(255,109,41,0.15)",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                gap: "2rem",
+                background: "linear-gradient(160deg, rgba(255,109,41,0.06) 0%, transparent 60%)",
+              }}
             >
-              <div
-                className="px-7 py-6"
-                style={{
-                  background: "linear-gradient(135deg, rgba(255,144,99,0.12) 0%, rgba(255,109,41,0.08) 100%)",
-                  borderBottom: "1px solid rgba(255,109,41,0.2)",
-                }}
-              >
-                <p style={{ fontSize: "0.72rem", color: "var(--primary)", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "8px", fontFamily: "'Space Grotesk', sans-serif" }}>
-                  Caption Flow + Clean Animation Pack
+              <div>
+                <p style={{
+                  fontFamily: "'Space Grotesk', sans-serif",
+                  fontSize: "0.68rem",
+                  color: "#FF9063",
+                  fontWeight: 600,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  marginBottom: 6,
+                }}>
+                  Caption Flow
                 </p>
-                <h3 style={{ color: "#fff", fontWeight: 700, fontSize: "1.3rem", marginBottom: "2px", fontFamily: "'Space Grotesk', sans-serif" }}>Combo Completo</h3>
-                <p style={{ color: "#adaaaa", fontSize: "0.85rem", fontFamily: "'Inter', sans-serif" }}>Extensão + Clean Animation Pack. Tudo que você precisa, num único acesso.</p>
-                <div className="mt-4">
-                  <div style={{ display: "flex", alignItems: "baseline", gap: "3px", lineHeight: 1 }}>
-                    <span style={{ fontSize: "0.8rem", color: "#adaaaa", fontFamily: "'Inter', sans-serif" }}>12x de</span>
-                    <span style={{ fontSize: "2.8rem", fontWeight: 800, letterSpacing: "-0.04em", color: "#fff", fontFamily: "'Space Grotesk', sans-serif" }}>R$20</span>
-                    <span style={{ fontSize: "1.2rem", fontWeight: 700, color: "#fff", fontFamily: "'Space Grotesk', sans-serif" }}>,06</span>
+                <h3 style={{
+                  fontFamily: "'TASAOrbiter', sans-serif",
+                  fontSize: "1.5rem",
+                  fontWeight: 700,
+                  color: "#fff",
+                  margin: "0 0 4px",
+                  letterSpacing: "-0.02em",
+                }}>
+                  Acesso completo
+                </h3>
+                <p style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: "0.82rem",
+                  color: "#555",
+                  margin: "0 0 28px",
+                }}>
+                  Pagamento único · Sem mensalidade
+                </p>
+
+                {/* Installment price (primary) */}
+                <div style={{ marginBottom: 4 }}>
+                  <div style={{ display: "flex", alignItems: "baseline", gap: 3, lineHeight: 1 }}>
+                    <span style={{
+                      fontFamily: "'Space Grotesk', sans-serif",
+                      fontSize: "0.82rem",
+                      color: "#888",
+                    }}>12x de</span>
                   </div>
-                  <p style={{ fontSize: "0.75rem", color: "#6e6e6e", marginTop: "4px", fontFamily: "'Inter', sans-serif" }}>
-                    ou <span style={{ color: "#adaaaa", fontWeight: 500 }}>R$194</span> à vista
-                  </p>
+                  <div style={{ display: "flex", alignItems: "baseline", gap: 3 }}>
+                    <span style={{
+                      fontFamily: "'Space Grotesk', sans-serif",
+                      fontSize: "3rem",
+                      fontWeight: 800,
+                      letterSpacing: "-0.04em",
+                      color: "#fff",
+                      lineHeight: 1.1,
+                    }}>R$25</span>
+                    <span style={{
+                      fontFamily: "'Space Grotesk', sans-serif",
+                      fontSize: "1.4rem",
+                      fontWeight: 700,
+                      color: "#fff",
+                    }}>,55</span>
+                  </div>
                 </div>
+                <p style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: "0.75rem",
+                  color: "#555",
+                  marginBottom: 0,
+                }}>
+                  ou <span style={{ color: "#FF9063", fontWeight: 600 }}>R$247</span> à vista
+                  {" "}·{" "}
+                  <span style={{ textDecoration: "line-through" }}>R$297</span>
+                </p>
               </div>
-              <div className="flex flex-col flex-1 px-7 py-6" style={{ background: "rgba(0,0,0,0.6)" }}>
-                <ul className="flex flex-col gap-3 flex-1">
-                  {extensaoItems.map((item, i) => <GreenCheck key={i} text={item} />)}
-                  {comboExtraItems.map((item, i) => <GreenCheck key={i} text={item} />)}
-                </ul>
+
+              {/* CTA */}
+              <div>
                 <a
                   href="https://pay.kiwify.com.br/ZBIgHVx"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl py-3.5 text-base font-semibold text-white transition-all hover:opacity-90 active:scale-95"
-                  style={{ background: "linear-gradient(135deg,#ff9063,#FF6D29)" }}
+                  style={{
+                    display: "flex",
+                    width: "100%",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 8,
+                    borderRadius: 12,
+                    padding: "14px 20px",
+                    fontSize: "1rem",
+                    fontWeight: 700,
+                    color: "#fff",
+                    background: "linear-gradient(135deg, #ff9063, #FF6D29)",
+                    textDecoration: "none",
+                    fontFamily: "'Space Grotesk', sans-serif",
+                    transition: "opacity 0.2s",
+                    marginBottom: 20,
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.opacity = "0.88")}
+                  onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
                 >
-                  Quero o Combo Completo →
+                  Quero o Caption Flow →
                 </a>
+
+                {/* Avatar social proof */}
+                <AvatarStack />
+              </div>
+            </div>
+
+            {/* RIGHT: feature list */}
+            <div style={{ padding: "3rem 2.5rem" }}>
+              <p style={{
+                fontFamily: "'TASAOrbiter', sans-serif",
+                fontSize: "0.7rem",
+                fontWeight: 600,
+                letterSpacing: "0.15em",
+                color: "#555",
+                textTransform: "uppercase",
+                marginBottom: "1.25rem",
+              }}>
+                Tudo incluso
+              </p>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 14 }}>
+                {ITEMS.map((item, i) => (
+                  <li
+                    key={i}
+                    style={{ display: "flex", alignItems: "flex-start", gap: 10 }}
+                  >
+                    <div style={{
+                      width: 18, height: 18, borderRadius: "50%", flexShrink: 0, marginTop: 2,
+                      background: item.bonus ? "rgba(255,109,41,0.15)" : "rgba(52,199,89,0.15)",
+                      display: "flex", alignItems: "center", justifyContent: "center",
+                    }}>
+                      <Check
+                        size={10}
+                        color={item.bonus ? "#FF9063" : "#34C759"}
+                        strokeWidth={2.5}
+                      />
+                    </div>
+                    <span style={{
+                      fontFamily: "'TASAOrbiter', sans-serif",
+                      fontSize: "0.88rem",
+                      color: item.bonus ? "#FF9063" : "#d1d1d1",
+                      lineHeight: 1.4,
+                    }}>
+                      {item.label}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Guarantee note */}
+              <div style={{
+                marginTop: 28,
+                padding: "12px 14px",
+                borderRadius: 10,
+                border: "1px solid rgba(255,255,255,0.06)",
+                background: "rgba(255,255,255,0.02)",
+              }}>
+                <p style={{
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: "0.75rem",
+                  color: "#555",
+                  margin: 0,
+                  lineHeight: 1.5,
+                }}>
+                  ↩️ Garantia incondicional de 7 dias. Se não gostar, devolvemos 100%.
+                </p>
               </div>
             </div>
           </div>
-          </motion.div>
-        </div>
+        </motion.div>
 
-        {/* Selos */}
-        <div className="flex flex-wrap gap-6 justify-center mt-10">
+        {/* Trust badges */}
+        <div className="flex flex-wrap gap-6 justify-center mt-8">
           {["🔒 Checkout seguro", "⚡ Acesso imediato", "↩️ Garantia 7 dias", "🔄 Atualizações grátis"].map((item, i) => (
             <span key={i} className="text-sm text-[#6e6e73]">{item}</span>
           ))}
         </div>
       </div>
+      <style>{`
+        @media (max-width: 768px) {
+          .oferta-card-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .oferta-card-grid > div:first-child {
+            border-right: none !important;
+            border-bottom: 1px solid rgba(255,109,41,0.15) !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

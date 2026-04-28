@@ -7,7 +7,7 @@ const faqs = [
   },
   {
     q: "Funciona com qualquer MOGRT?",
-    a: "O Caption Flow é otimizado e testado para funcionar com os templates do Clean Animation Pack. Para MOGRTs de outras fontes, a compatibilidade pode variar.",
+    a: "Sim. O Caption Flow consegue ler e aplicar MOGRTs externos, sendo compatível com uma ampla variedade de templates. Porém, a compatibilidade depende do MOGRT: arquivos muito complexos ou de baixa qualidade podem apresentar erros ao serem importados. Para melhores resultados, use MOGRTs bem estruturados.",
   },
   {
     q: "Funciona em qualquer versão do Adobe Premiere?",
@@ -19,7 +19,7 @@ const faqs = [
   },
   {
     q: "A instalação é difícil?",
-    a: "São três passos que levam menos de 5 minutos. Tem um tutorial em vídeo incluso mostrando cada etapa do processo.",
+    a: "Não. A instalação é feita com apenas um clique — você baixa o instalador e ele faz tudo automaticamente. Incluso na compra tem uma videoaula mostrando o processo completo em menos de 5 minutos.",
   },
   {
     q: "Tem garantia?",

@@ -1,178 +1,87 @@
 "use client";
-
-import { useEffect, useRef, useState } from "react";
+import { motion } from "motion/react";
+import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 
 const feedbacks = [
-  { file: "/feedback-01.png", name: "feedback 01.png" },
-  { file: "/feedback-02.png", name: "feedback 02.png" },
-  { file: "/feedback-03.png", name: "feedback 3.png" },
-  { file: "/feedback-04.png", name: "feedback 4.png" },
-  { file: "/feedback-05.png", name: "feedback 5.png" },
+  { src: "/feedback-01.png" },
+  { src: "/feedback-02.png" },
+  { src: "/feedback-03.png" },
+  { src: "/feedback-04.png" },
+  { src: "/feedback-05.png" },
+  { src: "/feedback-06.png" },
+  { src: "/feedback-07.png" },
+  { src: "/feedback-08.png" },
+  { src: "/feedback-09.png" },
+  { src: "/feedback-10.png" },
 ];
 
-function FinderWindow({ src, filename }: { src: string; filename: string }) {
-  return (
-    <div style={{
-      borderRadius: "12px",
-      overflow: "hidden",
-      boxShadow: "0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08)",
-      background: "#1e1e1e",
-      fontFamily: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif",
-      width: "100%",
-    }}>
-      {/* Titlebar */}
-      <div style={{
-        background: "linear-gradient(180deg, #3a3a3a 0%, #2d2d2d 100%)",
-        padding: "10px 14px",
-        display: "flex",
-        alignItems: "center",
-        gap: "8px",
-        borderBottom: "1px solid rgba(0,0,0,0.4)",
-      }}>
-        <div style={{ display: "flex", gap: "6px", flexShrink: 0 }}>
-          <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "#FF5F57" }} />
-          <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "#FFBD2E" }} />
-          <div style={{ width: "12px", height: "12px", borderRadius: "50%", background: "#28CA41" }} />
-        </div>
-        <span style={{
-          flex: 1,
-          textAlign: "center",
-          fontSize: "0.72rem",
-          color: "#b0b0b0",
-          letterSpacing: "0.01em",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          whiteSpace: "nowrap",
-          marginRight: "30px",
-        }}>
-          {filename}
-        </span>
-      </div>
-      <div style={{ background: "#000", lineHeight: 0 }}>
-        <img src={src} alt={filename} style={{ width: "100%", display: "block", objectFit: "cover" }} />
-      </div>
-    </div>
-  );
-}
-
-function MobileCarousel() {
-  const [current, setCurrent] = useState(0);
-  const [fading, setFading] = useState(false);
-  const timerRef   = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const touchStartX = useRef<number | null>(null);
-  const touchStartY = useRef<number | null>(null);
-
-  function goTo(index: number) {
-    if (fading) return;
-    setFading(true);
-    if (timerRef.current) clearTimeout(timerRef.current);
-    setTimeout(() => {
-      setCurrent((index + feedbacks.length) % feedbacks.length);
-      setFading(false);
-      scheduleNext();
-    }, 400);
-  }
-
-  function scheduleNext() {
-    if (timerRef.current) clearTimeout(timerRef.current);
-    timerRef.current = setTimeout(() => goTo(current + 1), 5000);
-  }
-
-  // useEffect to keep scheduleNext in sync with current
-  useEffect(() => {
-    scheduleNext();
-    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [current]);
-
-  function onTouchStart(e: React.TouchEvent) {
-    touchStartX.current = e.touches[0].clientX;
-    touchStartY.current = e.touches[0].clientY;
-  }
-
-  function onTouchEnd(e: React.TouchEvent) {
-    if (touchStartX.current === null || touchStartY.current === null) return;
-    const dx = e.changedTouches[0].clientX - touchStartX.current;
-    const dy = e.changedTouches[0].clientY - touchStartY.current;
-    // só detecta swipe horizontal se movimento horizontal > vertical
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
-      goTo(dx < 0 ? current + 1 : current - 1);
-    }
-    touchStartX.current = null;
-    touchStartY.current = null;
-  }
-
-  return (
-    <div style={{ width: "100%", maxWidth: "340px", margin: "0 auto" }}>
-      <div
-        onTouchStart={onTouchStart}
-        onTouchEnd={onTouchEnd}
-        style={{
-          opacity: fading ? 0 : 1,
-          transform: fading ? "translateY(10px)" : "translateY(0)",
-          transition: "opacity 0.4s ease, transform 0.4s ease",
-        }}
-      >
-        <FinderWindow src={feedbacks[current].file} filename={feedbacks[current].name} />
-      </div>
-
-      {/* Dots */}
-      <div style={{ display: "flex", justifyContent: "center", gap: "8px", marginTop: "16px" }}>
-        {feedbacks.map((_, i) => (
-          <div
-            key={i}
-            onClick={() => goTo(i)}
-            style={{
-              width: i === current ? "20px" : "8px",
-              height: "8px",
-              borderRadius: "4px",
-              background: i === current ? "#000000" : "rgba(0,0,0,0.25)",
-              transition: "all 0.3s ease",
-              cursor: "pointer",
-            }}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
+const col1 = feedbacks.filter((_, i) => i % 3 === 0); // 0, 3, 6, 9
+const col2 = feedbacks.filter((_, i) => i % 3 === 1); // 1, 4, 7
+const col3 = feedbacks.filter((_, i) => i % 3 === 2); // 2, 5, 8
 
 export default function ProvasSociaisSection() {
   return (
-    <section className="py-20 px-6" style={{ background: "#FF6D29" }}>
-      <div className="max-w-5xl mx-auto">
-        <div className="reveal text-center mb-12">
-          <p className="section-label" style={{ color: "rgba(0,0,0,0.5)", borderColor: "rgba(0,0,0,0.15)", background: "rgba(0,0,0,0.08)" }}>Resultados reais</p>
-          <h2
-            className="font-bold leading-tight"
-            style={{ fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)", letterSpacing: "-0.02em", color: "#000" }}
-          >
-            Confira o que estão dizendo:
+    <section
+      className="relative overflow-hidden"
+      style={{ background: "#f0efe9", paddingTop: "5rem", paddingBottom: "6rem" }}
+    >
+      {/* Header */}
+      <div className="container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true }}
+          className="flex flex-col items-center justify-center max-w-xl mx-auto mb-12 text-center"
+        >
+          <p style={{
+            fontFamily: "'TASAOrbiter', sans-serif",
+            fontSize: "0.72rem",
+            fontWeight: 400,
+            letterSpacing: "0.18em",
+            color: "#999",
+            textTransform: "uppercase",
+            marginBottom: 16,
+          }}>
+            Quem já usa
+          </p>
+          <h2 style={{
+            fontFamily: "'TASAOrbiter', sans-serif",
+            fontSize: "clamp(2rem, 4vw, 3rem)",
+            fontWeight: 700,
+            letterSpacing: "-0.025em",
+            lineHeight: 1.1,
+            color: "#1a1a1a",
+            margin: "0 0 14px",
+          }}>
+            Editores reais.<br /><span style={{ color: "#FF6D29" }}>Resultados reais.</span>
           </h2>
-        </div>
+          <p style={{
+            fontFamily: "'TASAOrbiter', sans-serif",
+            fontSize: "clamp(0.9rem, 1.4vw, 1.05rem)",
+            color: "#777",
+            margin: 0,
+            lineHeight: 1.55,
+          }}>
+            Veja o que os editores que já usam o Caption Flow estão falando.
+          </p>
+        </motion.div>
+      </div>
 
-        {/* Mobile: carrossel automático */}
-        <div className="md:hidden reveal">
-          <MobileCarousel />
-        </div>
-
-        {/* Desktop: 3 em cima + 2 embaixo */}
-        <div className="hidden md:block reveal">
-          <div className="flex gap-5 justify-center items-start mb-5">
-            {feedbacks.slice(0, 3).map((f, i) => (
-              <div key={i} style={{ flex: "1", maxWidth: "300px" }}>
-                <FinderWindow src={f.file} filename={f.name} />
-              </div>
-            ))}
-          </div>
-          <div className="flex gap-5 justify-center items-start">
-            {feedbacks.slice(3).map((f, i) => (
-              <div key={i} style={{ flex: "1", maxWidth: "300px" }}>
-                <FinderWindow src={f.file} filename={f.name} />
-              </div>
-            ))}
-          </div>
-        </div>
+      {/* 3 Scrolling columns — masked top/bottom */}
+      <div
+        className="flex justify-center gap-5"
+        style={{
+          maxHeight: 720,
+          overflow: "hidden",
+          maskImage: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)",
+          WebkitMaskImage: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)",
+          padding: "0 clamp(1rem, 4vw, 5rem)",
+        }}
+      >
+        <TestimonialsColumn items={col1} duration={18} className="w-full max-w-xs" />
+        <TestimonialsColumn items={col2} duration={22} className="hidden md:block w-full max-w-xs" />
+        <TestimonialsColumn items={col3} duration={16} className="hidden lg:block w-full max-w-xs" />
       </div>
     </section>
   );

@@ -52,14 +52,15 @@ export default function SocialProofToast() {
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
 
-  const cityRef       = useRef<string | null>(null);
-  const namePoolRef   = useRef<string[]>([]);
-  const lastNameRef   = useRef("");
-  const oncePoolRef   = useRef([...TEXTS_ONCE]);
-  const repeatPoolRef = useRef<string[]>([]);
-  const showCountRef  = useRef(0);       // quantas vezes já mostrou
-  const startTimeRef  = useRef(0);       // timestamp do início
-  const hideTimerRef  = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const cityRef         = useRef<string | null>(null);
+  const namePoolRef     = useRef<string[]>([]);
+  const lastNameRef     = useRef("");
+  const oncePoolRef     = useRef([...TEXTS_ONCE]);
+  const repeatPoolRef   = useRef<string[]>([]);
+  const showCountRef    = useRef(0);
+  const startTimeRef    = useRef(0);
+  const hideTimerRef    = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const scheduleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   function nextName(): string {
     if (!namePoolRef.current.length) {
@@ -104,18 +105,8 @@ export default function SocialProofToast() {
   }
 
   function scheduleNext(isFirst = false) {
-    let delay: number;
-    if (isFirst) {
-      // primeira aparição: 4s–12s aleatório
-      delay = rand(4, 12) * 1000;
-    } else if (showCountRef.current < 4 && Date.now() - startTimeRef.current < 60000) {
-      // primeiros 60s: 4 aparições com 8s–18s entre cada
-      delay = rand(8, 18) * 1000;
-    } else {
-      // após 60s: 1 por minuto com delay aleatório de 20s–55s
-      delay = rand(20, 55) * 1000;
-    }
-    setTimeout(() => {
+    const delay = isFirst ? rand(20, 25) * 1000 : rand(55, 65) * 1000;
+    scheduleTimerRef.current = setTimeout(() => {
       showCountRef.current++;
       showToast();
       scheduleNext();
@@ -147,6 +138,7 @@ export default function SocialProofToast() {
 
     return () => {
       if (hideTimerRef.current) clearTimeout(hideTimerRef.current);
+      if (scheduleTimerRef.current) clearTimeout(scheduleTimerRef.current);
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
