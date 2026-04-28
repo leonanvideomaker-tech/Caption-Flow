@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import ExtensionMockup from "@/components/ExtensionMockup";
 
@@ -82,13 +82,24 @@ const EASE = [0.16, 1, 0.3, 1] as const;
 export default function FuncionalidadesSection() {
   const [active, setActive] = useState<Tab>("gerar");
   const t = THEMES[active];
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    if (typeof window === "undefined" || window.innerWidth > 768) return;
+    const el = document.getElementById(`func-tab-${active}`);
+    if (!el) return;
+    const timer = setTimeout(() => {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 420);
+    return () => clearTimeout(timer);
+  }, [active]);
 
   function handleTabClick(id: Tab) {
     setActive(id);
-    if (window.innerWidth <= 768) {
-      const el = document.getElementById("funcionalidades");
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
   }
 
   return (
@@ -152,6 +163,7 @@ export default function FuncionalidadesSection() {
             return (
               <motion.div
                 key={f.id}
+                id={`func-tab-${f.id}`}
                 onClick={() => handleTabClick(f.id)}
                 onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleTabClick(f.id); } }}
                 role="button"

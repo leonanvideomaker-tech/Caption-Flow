@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { VideoComparison } from "@/components/ui/image-comparison-slider";
 
 const PAIRS = [
@@ -11,6 +12,7 @@ const PAIRS = [
 export default function AnteDepoisSection() {
   const [visibleCount, setVisibleCount] = useState(3);
   const [page, setPage] = useState(0);
+  const [dir, setDir] = useState(0);
   const touchStartX = useRef<number | null>(null);
 
   useEffect(() => {
@@ -26,8 +28,8 @@ export default function AnteDepoisSection() {
 
   const maxPage = PAIRS.length - visibleCount;
 
-  const prev = () => setPage((p) => Math.max(0, p - 1));
-  const next = () => setPage((p) => Math.min(maxPage, p + 1));
+  const prev = () => { setDir(-1); setPage((p) => Math.max(0, p - 1)); };
+  const next = () => { setDir(1); setPage((p) => Math.min(maxPage, p + 1)); };
 
   const onTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
@@ -39,6 +41,7 @@ export default function AnteDepoisSection() {
     else if (delta < -40) prev();
     touchStartX.current = null;
   };
+
 
   const visible = PAIRS.slice(page, page + visibleCount);
 
@@ -111,26 +114,43 @@ export default function AnteDepoisSection() {
         </button>
 
         {/* Cards */}
-        <div style={{ flex: 1, display: "flex", gap: 16 }}>
-          {visible.map((pair, i) => (
-            <div key={pair.id} style={{ flex: 1, minWidth: 0 }}>
-              <p style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: "0.6rem",
-                letterSpacing: "0.1em",
-                color: "#ccc",
-                textAlign: "center",
-                marginBottom: 8,
-                textTransform: "uppercase",
-              }}>
-                {page + i + 1} / {PAIRS.length}
-              </p>
-              <VideoComparison
-                beforeSrc={pair.beforeSrc}
-                afterSrc={pair.afterSrc}
-              />
-            </div>
-          ))}
+        <div style={{ flex: 1, overflow: "hidden" }}>
+          <AnimatePresence initial={false} custom={dir} mode="popLayout">
+            <motion.div
+              key={page}
+              custom={dir}
+              variants={{
+                enter: (d: number) => ({ x: d >= 0 ? "100%" : "-100%", opacity: 0 }),
+                center: { x: 0, opacity: 1 },
+                exit: (d: number) => ({ x: d >= 0 ? "-100%" : "100%", opacity: 0 }),
+              }}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+              style={{ display: "flex", gap: 16 }}
+            >
+              {visible.map((pair, i) => (
+                <div key={pair.id} style={{ flex: 1, minWidth: 0 }}>
+                  <p style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: "0.6rem",
+                    letterSpacing: "0.1em",
+                    color: "#ccc",
+                    textAlign: "center",
+                    marginBottom: 8,
+                    textTransform: "uppercase",
+                  }}>
+                    {page + i + 1} / {PAIRS.length}
+                  </p>
+                  <VideoComparison
+                    beforeSrc={pair.beforeSrc}
+                    afterSrc={pair.afterSrc}
+                  />
+                </div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
         </div>
 
         {/* Right arrow */}

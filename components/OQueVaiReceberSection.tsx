@@ -32,7 +32,7 @@ const PRODUCT_BOXES: BoxConfig[] = [
     titleColor: "#a8a8a8",
     ghostLetter: "B",
     subtitle: "Módulo essencial de legendas para Premiere",
-    value: "R$147",
+    value: "R$197",
     bodyBg: "#111111",
     bandBg: "#252525",
     topFaceBg: "#2a2a2a",
@@ -46,7 +46,7 @@ const PRODUCT_BOXES: BoxConfig[] = [
     titleColor: "#FF6D29",
     ghostLetter: "P",
     subtitle: "SFX, templates animados e recursos avançados",
-    value: "R$297",
+    value: "R$449",
     bodyBg: "linear-gradient(170deg, #1e1000 0%, #111 100%)",
     bandBg: "#FF6D29",
     topFaceBg: "#2e1800",
@@ -454,7 +454,7 @@ export default function OQueVaiReceberSection() {
           margin: 0,
           lineHeight: 1,
         }}>
-          R$795,00
+          R$997,00
         </p>
       </div>
 
