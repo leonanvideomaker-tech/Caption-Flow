@@ -12,14 +12,12 @@ import QuemSouEuSection from "@/components/QuemSouEuSection";
 import CtaFinal from "@/components/CtaFinal";
 import Footer from "@/components/Footer";
 import RevealInit from "@/components/RevealInit";
-import SocialProofToast from "@/components/SocialProofToast";
 import DevViewportToggle from "@/components/DevViewportToggle";
 
 export default function Home() {
   return (
     <>
       <RevealInit />
-      <SocialProofToast />
       <div id="__dev-viewport-root">
         <HeroSection />
         <MarqueeRibbon />
