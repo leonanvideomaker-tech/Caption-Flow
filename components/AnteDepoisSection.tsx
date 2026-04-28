@@ -85,8 +85,6 @@ export default function AnteDepoisSection() {
       <div
         className="ante-depois-row"
         style={{ padding: "0 clamp(2rem, 5vw, 6rem)", display: "flex", alignItems: "center", gap: 16 }}
-        onTouchStart={onTouchStart}
-        onTouchEnd={onTouchEnd}
       >
 
         {/* Left arrow */}
@@ -192,15 +190,17 @@ export default function AnteDepoisSection() {
 
       <style>{`
         @media (max-width: 640px) {
-          .ante-depois-arrow { display: none !important; }
           .ante-depois-row {
-            padding: 0 1rem !important;
-            gap: 0 !important;
+            padding: 0 0.75rem !important;
+            gap: 8px !important;
+          }
+          .ante-depois-arrow {
+            width: 40px !important;
+            height: 40px !important;
           }
           .ante-depois-header {
             padding: 0 1rem !important;
           }
-          .ante-depois-swipe-hint { display: block !important; }
         }
       `}</style>
     </section>

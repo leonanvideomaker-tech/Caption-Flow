@@ -83,6 +83,14 @@ export default function FuncionalidadesSection() {
   const [active, setActive] = useState<Tab>("gerar");
   const t = THEMES[active];
 
+  function handleTabClick(id: Tab) {
+    setActive(id);
+    if (window.innerWidth <= 768) {
+      const el = document.getElementById("funcionalidades");
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+
   return (
     <motion.section
       id="funcionalidades"
@@ -144,8 +152,8 @@ export default function FuncionalidadesSection() {
             return (
               <motion.div
                 key={f.id}
-                onClick={() => setActive(f.id)}
-                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActive(f.id); } }}
+                onClick={() => handleTabClick(f.id)}
+                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleTabClick(f.id); } }}
                 role="button"
                 tabIndex={0}
                 style={{
