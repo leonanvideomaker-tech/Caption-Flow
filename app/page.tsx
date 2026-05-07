@@ -20,6 +20,7 @@ export default function Home() {
       <RevealInit />
       <div id="__dev-viewport-root">
         <HeroSection />
+        <OfertaSection />
         <MarqueeRibbon />
         <AnteDepoisSection />
         <OQueESection />
