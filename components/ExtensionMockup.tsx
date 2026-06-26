@@ -266,14 +266,42 @@ const TEMPLATE_VIDEOS = [
   { name: "3 Linhas 3", src: "/videos/templates/3linhas-3.mp4", cat: "3 linhas" },
   { name: "3 Linhas 4", src: "/videos/templates/3linhas-4.mp4", cat: "3 linhas" },
   { name: "3 Linhas 5", src: "/videos/templates/3linhas-5.mp4", cat: "3 linhas" },
-  { name: "Nome 01", src: "/videos/templates/lower-third-1.mp4", cat: "lower third" },
-  { name: "Nome 02", src: "/videos/templates/lower-third-2.mp4", cat: "lower third" },
-  { name: "Nome 03", src: "/videos/templates/lower-third-3.mp4", cat: "lower third" },
+  { name: "4 Linhas 1", src: "/videos/templates/4linhas-1.mp4", cat: "4 linhas" },
+  { name: "4 Linhas 2", src: "/videos/templates/4linhas-2.mp4", cat: "4 linhas" },
+  { name: "4 Linhas 3", src: "/videos/templates/4linhas-3.mp4", cat: "4 linhas" },
+  { name: "4 Linhas 4", src: "/videos/templates/4linhas-4.mp4", cat: "4 linhas" },
+  { name: "4 Linhas 5", src: "/videos/templates/4linhas-5.mp4", cat: "4 linhas" },
 ];
+
+function MeusTemplatesEmpty() {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8, padding: "16px 8px", textAlign: "center" }}>
+      <div style={{ fontSize: 10.5, color: "#555", lineHeight: 1.6 }}>
+        Nenhum template importado ainda.
+      </div>
+      <div style={{ display: "flex", gap: 5, width: "100%" }}>
+        <div style={{
+          flex: 1, padding: "6px 8px", borderRadius: 5, fontSize: 10, color: "#FF6D29",
+          background: "rgba(255,109,41,0.08)", border: "1px solid rgba(255,109,41,0.2)",
+          textAlign: "center", cursor: "pointer",
+        }}>
+          ↗ Capturar da Timeline
+        </div>
+        <div style={{
+          flex: 1, padding: "6px 8px", borderRadius: 5, fontSize: 10, color: "#888",
+          background: "#1c1b1b", border: "1px solid #2a2929",
+          textAlign: "center", cursor: "pointer",
+        }}>
+          + Importar MOGRT externo
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function PaneTemplates() {
   const [cat, setCat] = useState("2 linhas");
-  const cats = ["2 linhas", "3 linhas", "lower third"];
+  const cats = ["2 linhas", "3 linhas", "4 linhas", "meus templates"];
   const filtered = TEMPLATE_VIDEOS.filter((t) => t.cat === cat);
 
   return (
@@ -298,11 +326,15 @@ function PaneTemplates() {
             </button>
           ))}
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 6 }}>
-          {filtered.map((t) => (
-            <TemplateVideoCard key={t.src} name={t.name} src={t.src} />
-          ))}
-        </div>
+        {cat === "meus templates" ? (
+          <MeusTemplatesEmpty />
+        ) : (
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 6 }}>
+            {filtered.map((t) => (
+              <TemplateVideoCard key={t.src} name={t.name} src={t.src} />
+            ))}
+          </div>
+        )}
       </DemoCard>
     </div>
   );
@@ -384,6 +416,99 @@ function PaneSFX() {
       </DemoCard>
 
       <FlowButton>Gerar SFX</FlowButton>
+    </div>
+  );
+}
+
+// ─── Quick Style Bar ─────────────────────────────────────────────────
+
+function QuickStyleBar() {
+  const [copied, setCopied] = useState(false);
+
+  return (
+    <div style={{
+      borderTop: "1px solid #1a1a1a",
+      background: "#0a0a0a",
+      padding: "8px 10px",
+    }}>
+      {/* Header */}
+      <div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 7 }}>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#888" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" width="12" height="12">
+          <path d="M7.5 3.375c0-1.036.84-1.875 1.875-1.875h.375a3.75 3.75 0 0 1 3.75 3.75v1.875C13.5 8.161 14.34 9 15.375 9h1.875A3.75 3.75 0 0 1 21 12.75v3.375C21 17.16 20.16 18 19.125 18h-9.75A1.875 1.875 0 0 1 7.5 16.125V3.375Z"/>
+          <path d="M15 5.25a5.23 5.23 0 0 1 1.279-3.434 9.768 9.768 0 0 1 6.963 6.963A5.23 5.23 0 0 1 19.75 10H18a3.75 3.75 0 0 1-3-1.5V5.25Z"/>
+        </svg>
+        <span style={{ fontSize: 10, fontWeight: 600, color: "#aaa", fontFamily: "'Space Grotesk', sans-serif", flex: 1 }}>
+          Atalho de Estilos
+        </span>
+        {/* Toggle switch */}
+        <div style={{
+          width: 28, height: 16, borderRadius: 8, background: "#FF6D29",
+          position: "relative", cursor: "pointer", flexShrink: 0,
+        }}>
+          <div style={{
+            width: 12, height: 12, borderRadius: "50%", background: "#fff",
+            position: "absolute", top: 2, right: 2, transition: "left 0.15s",
+          }} />
+        </div>
+      </div>
+
+      {/* Buttons */}
+      <div style={{ display: "flex", gap: 5, marginBottom: 7 }}>
+        <button
+          onClick={() => setCopied(true)}
+          style={{
+            flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 5,
+            padding: "5px 8px", borderRadius: 5, border: `1px solid ${copied ? "rgba(255,109,41,0.4)" : "#2a2929"}`,
+            background: copied ? "rgba(255,109,41,0.1)" : "#161616",
+            color: copied ? "#FF6D29" : "#888", fontSize: 10, cursor: "pointer",
+            fontFamily: "'Space Grotesk', sans-serif",
+          }}
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" width="11" height="11">
+            <path d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>
+          </svg>
+          Copiar Estilo
+        </button>
+        <button
+          disabled={!copied}
+          style={{
+            flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 5,
+            padding: "5px 8px", borderRadius: 5, border: "1px solid #2a2929",
+            background: "#161616", color: copied ? "#888" : "#3a3a3a", fontSize: 10,
+            cursor: copied ? "pointer" : "default",
+            fontFamily: "'Space Grotesk', sans-serif", opacity: copied ? 1 : 0.5,
+          }}
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" width="11" height="11">
+            <path d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z"/>
+          </svg>
+          Colar Estilo
+        </button>
+      </div>
+
+      {/* Filter checkboxes */}
+      <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+        {[
+          { label: "Animação", checked: copied },
+          { label: "Clip",     checked: copied },
+          { label: "Efeitos",  checked: false   },
+        ].map(({ label, checked }) => (
+          <label key={label} style={{
+            display: "flex", alignItems: "center", gap: 7, fontSize: 9.5,
+            color: copied ? "#888" : "#444", cursor: copied ? "pointer" : "default",
+            fontFamily: "'Space Grotesk', sans-serif",
+          }}>
+            <div style={{
+              width: 12, height: 12, borderRadius: 3, border: `1px solid ${copied ? (checked ? "rgba(255,109,41,0.5)" : "#333") : "#2a2929"}`,
+              background: checked ? "rgba(255,109,41,0.15)" : "transparent", flexShrink: 0,
+              display: "flex", alignItems: "center", justifyContent: "center",
+            }}>
+              {checked && <span style={{ color: "#FF6D29", fontSize: 8, lineHeight: 1 }}>✓</span>}
+            </div>
+            {label}
+          </label>
+        ))}
+      </div>
     </div>
   );
 }
@@ -533,6 +658,9 @@ export default function ExtensionMockup({ activeTab: controlledTab }: { activeTa
           {activeTab === "templates" && <PaneTemplates />}
           {activeTab === "sfx" && <PaneSFX />}
         </div>
+
+        {/* Quick Style Bar */}
+        <QuickStyleBar />
 
         {/* Bottom shine */}
         <div style={{

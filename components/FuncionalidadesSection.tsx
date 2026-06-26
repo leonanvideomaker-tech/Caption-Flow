@@ -67,7 +67,7 @@ const FEATURES: { id: Tab; label: string; description: string }[] = [
     id: "templates",
     label: "Templates",
     description:
-      "13 templates animados prontos (2 linhas, 3 linhas, lower third) — passe o mouse para pré-visualizar antes de aplicar.",
+      "15 templates animados prontos (2 linhas, 3 linhas, 4 linhas) — passe o mouse para pré-visualizar antes de aplicar. Ou capture da sua própria timeline e salve como template.",
   },
   {
     id: "sfx",
@@ -264,7 +264,7 @@ export default function FuncionalidadesSection() {
                             margin: 0,
                             lineHeight: 1.6,
                           }}>
-                            Criou um MOGRT com a sua identidade visual? Faça o upload direto na extensão e use como qualquer template nativo. Pouquíssimas extensões do mercado permitem isso.
+                            Capture clipes direto da timeline e salve como template — ou importe qualquer MOGRT externo. Depois usa como qualquer template nativo. Pouquíssimas extensões do mercado permitem isso.
                           </p>
                         </motion.div>
                       )}
