@@ -5,19 +5,19 @@
   font-family: 'TASAOrbiter';
   src: url('/fonts/TASAOrbiter-Regular.otf') format('opentype');
   font-weight: 400;
-  font-display: swap;
+  font-display: block;
 }
 @font-face {
   font-family: 'TASAOrbiter';
   src: url('/fonts/TASAOrbiter-Medium.otf') format('opentype');
   font-weight: 500;
-  font-display: swap;
+  font-display: block;
 }
 @font-face {
   font-family: 'TASAOrbiter';
   src: url('/fonts/TASAOrbiter-Bold.otf') format('opentype');
   font-weight: 700;
-  font-display: swap;
+  font-display: block;
 }
 
 :root {

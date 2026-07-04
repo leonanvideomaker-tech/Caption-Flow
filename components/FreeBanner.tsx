@@ -3,6 +3,9 @@
 import { Download } from "lucide-react";
 import { Banner } from "@/components/ui/banner";
 
+const FREE_DRIVE_URL =
+  "https://drive.google.com/drive/folders/1aQZTKKAB5_lpBUQqIt4Rbn_6GNf_bIt_?usp=sharing";
+
 export default function FreeBanner() {
   return (
     <Banner
@@ -26,8 +29,9 @@ export default function FreeBanner() {
         </span>
 
         <a
-          href="/caption-flow-free.zip"
-          download="Caption Flow Free.zip"
+          href={FREE_DRIVE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
           style={{ fontFamily: "'Space Grotesk', sans-serif" }}
           className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-md bg-[#FF6D29] px-3 py-1 text-[11px] font-bold text-white transition-opacity hover:opacity-90 active:opacity-75 sm:text-xs"
         >

@@ -25,27 +25,13 @@ interface BoxConfig {
 
 const PRODUCT_BOXES: BoxConfig[] = [
   {
-    badge: "Extensão",
-    isBonus: false,
-    titleLine1: "Caption Flow",
-    titleLine2: "Basic",
-    titleColor: "#a8a8a8",
-    ghostLetter: "B",
-    subtitle: "Módulo essencial de legendas para Premiere",
-    value: "R$197",
-    bodyBg: "#111111",
-    bandBg: "#252525",
-    topFaceBg: "#2a2a2a",
-    sideFaceBg: "#0d0d0d",
-  },
-  {
     badge: "Extensão Pro",
     isBonus: false,
     titleLine1: "Caption Flow",
     titleLine2: "Pro",
     titleColor: "#FF6D29",
     ghostLetter: "P",
-    subtitle: "SFX, templates animados e recursos avançados",
+    subtitle: "Legendas completas, SFX, templates animados e recursos avançados",
     value: "R$449",
     bodyBg: "linear-gradient(170deg, #1e1000 0%, #111 100%)",
     bandBg: "#FF6D29",
@@ -454,7 +440,7 @@ export default function OQueVaiReceberSection() {
           margin: 0,
           lineHeight: 1,
         }}>
-          R$997,00
+          R$800,00
         </p>
       </div>
 

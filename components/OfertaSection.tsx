@@ -5,8 +5,7 @@ import { VerticalCutReveal } from "@/components/ui/vertical-cut-reveal";
 import { Check } from "lucide-react";
 
 const ITEMS = [
-  { label: "Caption Flow Basic — legendas essenciais no Premiere", bonus: false },
-  { label: "Caption Flow Pro — recursos avançados + SFX + templates", bonus: false },
+  { label: "Caption Flow Pro — legendas completas + SFX + templates", bonus: false },
   { label: "Vídeo aulas passo a passo", bonus: false },
   { label: "Acesso vitalício + atualizações futuras", bonus: false },
   { label: "Suporte 100% humano com o próprio criador", bonus: false },
@@ -15,8 +14,7 @@ const ITEMS = [
 ];
 
 const ANCHOR_ROWS = [
-  { label: "Caption Flow Basic", value: "R$197", bonus: false },
-  { label: "Caption Flow Pro (Premiere 2026+)", value: "R$449", bonus: false },
+  { label: "Caption Flow Pro (Premiere 2025 e 2026)", value: "R$449", bonus: false },
   { label: "Vídeo aulas passo a passo", value: "R$97", bonus: false },
   { label: "Acesso vitalício + atualizações futuras", value: "Imensurável", bonus: false, priceless: true },
   { label: "Suporte 100% humano com o próprio criador", value: "Imensurável", bonus: false, priceless: true },
@@ -62,7 +60,7 @@ function AvatarStack() {
         margin: 0,
         lineHeight: 1.45,
       }}>
-        <strong style={{ color: "rgba(255,255,255,0.8)", fontWeight: 600 }}>100+</strong>{" "}
+        <strong style={{ color: "rgba(255,255,255,0.8)", fontWeight: 600 }}>+300</strong>{" "}
         editores já usam o Caption Flow.
       </p>
     </div>
@@ -150,7 +148,7 @@ export default function OfertaSection() {
             ))}
             <div className="flex items-center justify-between pt-3 mt-1">
               <span className="font-bold text-white">Valor real</span>
-              <span className="font-bold line-through" style={{ color: "#FF3B30" }}>R$997</span>
+              <span className="font-bold line-through" style={{ color: "#FF3B30" }}>R$800</span>
             </div>
           </div>
         </motion.div>
@@ -192,7 +190,7 @@ export default function OfertaSection() {
               margin: 0,
             }}>
               Você pagaria{" "}
-              <span style={{ textDecoration: "line-through", color: "#bbb" }}>R$997</span>
+              <span style={{ textDecoration: "line-through", color: "#bbb" }}>R$800</span>
               , mas hoje você vai pagar apenas:
             </p>
 
@@ -319,7 +317,7 @@ export default function OfertaSection() {
                   margin: "0 0 4px",
                   letterSpacing: "-0.02em",
                 }}>
-                  Acesso completo
+                  Acesso Vitalício
                 </h3>
                 <p style={{
                   fontFamily: "'Inter', sans-serif",
@@ -364,7 +362,7 @@ export default function OfertaSection() {
                 }}>
                   ou <span style={{ color: "#FF9063", fontWeight: 600 }}>R$247</span> à vista
                   {" "}·{" "}
-                  <span style={{ textDecoration: "line-through" }}>R$997</span>
+                  <span style={{ textDecoration: "line-through" }}>R$800</span>
                 </p>
               </div>
 

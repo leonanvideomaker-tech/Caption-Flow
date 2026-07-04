@@ -31,7 +31,7 @@ export default function CtaFinal() {
             </a>
           </div>
           <p className="mt-6 text-sm text-[#6e6e73]">
-            Acesso imediato · Premiere Pro 2026+ · Garantia de 7 dias
+            Acesso imediato · Premiere Pro 2025 e 2026 · Garantia de 7 dias
           </p>
         </div>
       </div>

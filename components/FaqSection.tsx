@@ -11,11 +11,11 @@ const faqs = [
   },
   {
     q: "Funciona em qualquer versão do Adobe Premiere?",
-    a: "Não. O Caption Flow é compatível somente com o Adobe Premiere Pro 2026 ou versões superiores. Versões anteriores não são suportadas.",
+    a: "Não. O Caption Flow é compatível com o Adobe Premiere Pro 2025 e 2026. Versões anteriores não são suportadas.",
   },
   {
     q: "Funciona no Windows também?",
-    a: "Sim. Compatível com macOS e Windows, Premiere Pro 2026 ou mais recente.",
+    a: "Sim. Compatível com macOS e Windows, Premiere Pro 2025 e 2026.",
   },
   {
     q: "A instalação é difícil?",

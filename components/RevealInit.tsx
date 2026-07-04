@@ -3,17 +3,6 @@ import { useEffect } from "react";
 
 export default function RevealInit() {
   useEffect(() => {
-    // Garante scroll no topo — duplo rAF para pegar após o primeiro paint
-    history.scrollRestoration = "manual";
-    const forceTop = () => {
-      window.scrollTo(0, 0);
-    };
-    forceTop();
-    requestAnimationFrame(() => {
-      requestAnimationFrame(forceTop);
-    });
-
-    // Reveal ao scroll
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
