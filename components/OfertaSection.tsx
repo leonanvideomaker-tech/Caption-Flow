@@ -15,11 +15,11 @@ const ITEMS = [
 
 const ANCHOR_ROWS = [
   { label: "Caption Flow Pro (Premiere 2025 e 2026)", value: "R$449", bonus: false },
-  { label: "Vídeo aulas passo a passo", value: "R$97", bonus: false },
+  { label: "Vídeo aulas passo a passo", value: "R$199", bonus: false },
   { label: "Acesso vitalício + atualizações futuras", value: "Imensurável", bonus: false, priceless: true },
   { label: "Suporte 100% humano com o próprio criador", value: "Imensurável", bonus: false, priceless: true },
-  { label: "Bônus — Vídeo aula estilização + presets", value: "R$97", bonus: true },
-  { label: "Bônus — Masterclass Criativo Viral", value: "R$157", bonus: true },
+  { label: "Bônus — Vídeo aula estilização + presets", value: "R$149", bonus: true },
+  { label: "Bônus — Masterclass Criativo Viral", value: "R$200", bonus: true },
 ];
 
 const AVATARS = [
@@ -148,7 +148,7 @@ export default function OfertaSection() {
             ))}
             <div className="flex items-center justify-between pt-3 mt-1">
               <span className="font-bold text-white">Valor real</span>
-              <span className="font-bold line-through" style={{ color: "#FF3B30" }}>R$800</span>
+              <span className="font-bold line-through" style={{ color: "#FF3B30" }}>R$997</span>
             </div>
           </div>
         </motion.div>
@@ -190,7 +190,7 @@ export default function OfertaSection() {
               margin: 0,
             }}>
               Você pagaria{" "}
-              <span style={{ textDecoration: "line-through", color: "#bbb" }}>R$800</span>
+              <span style={{ textDecoration: "line-through", color: "#bbb" }}>R$997</span>
               , mas hoje você vai pagar apenas:
             </p>
 
@@ -362,7 +362,7 @@ export default function OfertaSection() {
                 }}>
                   ou <span style={{ color: "#FF9063", fontWeight: 600 }}>R$247</span> à vista
                   {" "}·{" "}
-                  <span style={{ textDecoration: "line-through" }}>R$800</span>
+                  <span style={{ textDecoration: "line-through" }}>R$997</span>
                 </p>
               </div>
 

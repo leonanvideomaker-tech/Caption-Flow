@@ -46,7 +46,7 @@ const PRODUCT_BOXES: BoxConfig[] = [
     titleColor: "#e5e5e7",
     ghostLetter: "V",
     subtitle: "Passo a passo completo para dominar a extensão",
-    value: "R$97",
+    value: "R$199",
     bodyBg: "#111111",
     bandBg: "#2a2a2a",
     topFaceBg: "#2a2a2a",
@@ -64,7 +64,7 @@ const BONUS_BOXES: BoxConfig[] = [
     titleSize: "1.25rem",
     ghostLetter: "E",
     subtitle: "Vídeo aula exclusiva + presets prontos para usar",
-    value: "R$97",
+    value: "R$149",
     bodyBg: "linear-gradient(170deg, #2e1200 0%, #1a0a00 100%)",
     bandBg: "#FF6D29",
     topFaceBg: "#3e1a00",
@@ -79,7 +79,7 @@ const BONUS_BOXES: BoxConfig[] = [
     titleSize: "1.4rem",
     ghostLetter: "M",
     subtitle: "Como criar conteúdo que explode nas redes sociais",
-    value: "R$157",
+    value: "R$200",
     bodyBg: "linear-gradient(170deg, #2e1200 0%, #1a0a00 100%)",
     bandBg: "#FF6D29",
     topFaceBg: "#3e1a00",
@@ -362,9 +362,10 @@ export default function OQueVaiReceberSection() {
 
         {/* Left — product boxes, orange gradient */}
         <div className="oquevai-left" style={{
-          flex: "0 0 auto",
+          flex: 1,
           display: "flex", flexDirection: "column",
           justifyContent: "flex-end",
+          alignItems: "center",
           padding: `2rem 24px 3rem clamp(2rem, 6vw, 8rem)`,
           background: "linear-gradient(160deg, #FF6D29 0%, #c94b12 45%, #0a0a0a 100%)",
           gap: 16,
@@ -391,6 +392,7 @@ export default function OQueVaiReceberSection() {
           background: "#fff9f5",
           display: "flex", flexDirection: "column",
           justifyContent: "flex-end",
+          alignItems: "center",
           padding: `2rem clamp(2rem, 6vw, 8rem) 3rem 24px`,
           gap: 16,
         }}>
@@ -440,7 +442,7 @@ export default function OQueVaiReceberSection() {
           margin: 0,
           lineHeight: 1,
         }}>
-          R$800,00
+          R$997,00
         </p>
       </div>
 
