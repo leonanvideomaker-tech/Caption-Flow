@@ -17,6 +17,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <head>
+        <meta name="facebook-domain-verification" content="0gjaawjizcutdsggoxms9aihji5bo3" />
         <link rel="preload" href="/fonts/TASAOrbiter-Bold.otf" as="font" type="font/otf" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/TASAOrbiter-Regular.otf" as="font" type="font/otf" crossOrigin="anonymous" />
         <Script id="scroll-restoration" strategy="beforeInteractive">{`
