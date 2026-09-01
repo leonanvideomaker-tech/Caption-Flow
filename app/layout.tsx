@@ -55,7 +55,7 @@ export default function RootLayout({
               if (!a || typeof window.fbq !== 'function') return;
               window.fbq('track', 'InitiateCheckout', {
                 content_name: 'Caption Flow',
-                value: 306.60,
+                value: 247.00,
                 currency: 'BRL'
               });
             }, true);
