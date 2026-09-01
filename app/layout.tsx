@@ -36,8 +36,43 @@ export default function RootLayout({
             y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
           })(window, document, "clarity", "script", "xfe27qna3u");
         `}</Script>
+        <Script id="meta-pixel" strategy="afterInteractive">{`
+          !function(f,b,e,v,n,t,s)
+          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '4501516380094475');
+          fbq('track', 'PageView');
+        `}</Script>
+        <Script id="meta-pixel-checkout" strategy="afterInteractive">{`
+          (function(){
+            document.addEventListener('click', function(e){
+              var a = e.target && e.target.closest ? e.target.closest('a[href*="pay.kiwify.com.br"]') : null;
+              if (!a || typeof window.fbq !== 'function') return;
+              window.fbq('track', 'InitiateCheckout', {
+                content_name: 'Caption Flow',
+                value: 306.60,
+                currency: 'BRL'
+              });
+            }, true);
+          })();
+        `}</Script>
       </head>
       <body className="min-h-full">
+        <noscript>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            alt=""
+            src="https://www.facebook.com/tr?id=4501516380094475&ev=PageView&noscript=1"
+          />
+        </noscript>
         <FreeBanner />
         {children}
         <SocialProofToast />
