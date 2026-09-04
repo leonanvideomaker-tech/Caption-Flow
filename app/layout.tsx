@@ -61,6 +61,50 @@ export default function RootLayout({
             }, true);
           })();
         `}</Script>
+        <Script id="kiwify-utm-passthrough" strategy="afterInteractive">{`
+          (function(){
+            var KEYS = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','fbclid','src','sck'];
+            var STORE_KEY = 'cf_attribution';
+
+            function readStored(){
+              try {
+                var raw = sessionStorage.getItem(STORE_KEY);
+                if (!raw) return {};
+                var parsed = JSON.parse(raw);
+                return (parsed && typeof parsed === 'object') ? parsed : {};
+              } catch(e){ return {}; }
+            }
+
+            function writeStored(data){
+              try { sessionStorage.setItem(STORE_KEY, JSON.stringify(data)); } catch(e){}
+            }
+
+            var stored = readStored();
+            try {
+              var entry = new URLSearchParams(window.location.search);
+              var touched = false;
+              for (var i = 0; i < KEYS.length; i++) {
+                var value = entry.get(KEYS[i]);
+                if (value) { stored[KEYS[i]] = value; touched = true; }
+              }
+              if (touched) writeStored(stored);
+            } catch(e){}
+
+            document.addEventListener('click', function(e){
+              var a = e.target && e.target.closest ? e.target.closest('a[href*="pay.kiwify.com.br"]') : null;
+              if (!a) return;
+              var params = readStored();
+              try {
+                var url = new URL(a.getAttribute('href'), window.location.href);
+                for (var i = 0; i < KEYS.length; i++) {
+                  var k = KEYS[i];
+                  if (params[k] && !url.searchParams.has(k)) url.searchParams.set(k, params[k]);
+                }
+                a.href = url.toString();
+              } catch(err){}
+            }, true);
+          })();
+        `}</Script>
       </head>
       <body className="min-h-full">
         <noscript>
