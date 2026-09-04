@@ -100,6 +100,21 @@ export default function RootLayout({
                   var k = KEYS[i];
                   if (params[k] && !url.searchParams.has(k)) url.searchParams.set(k, params[k]);
                 }
+
+                // sck concatenado como redundancia: campanha|termo|conteudo.
+                // So entra se nenhum sck explicito ja tiver sido definido acima
+                // (nem pelo link de destino, nem pelo sck vindo da URL de entrada).
+                if (!url.searchParams.has('sck')) {
+                  var SCK_KEYS = ['utm_campaign','utm_term','utm_content'];
+                  var parts = [];
+                  var temAlgum = false;
+                  for (var j = 0; j < SCK_KEYS.length; j++) {
+                    var v = params[SCK_KEYS[j]];
+                    if (v) { temAlgum = true; parts.push(v); } else { parts.push('na'); }
+                  }
+                  if (temAlgum) url.searchParams.set('sck', parts.join('|'));
+                }
+
                 a.href = url.toString();
               } catch(err){}
             }, true);
