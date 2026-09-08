@@ -115,6 +115,14 @@ export default function RootLayout({
                   if (temAlgum) url.searchParams.set('sck', parts.join('|'));
                 }
 
+                // A Kiwify so guarda uma lista fixa de parametros e o fbclid nao
+                // esta nela: ele chega no checkout mas some no webhook. Copiamos o
+                // mesmo valor em s1 (que ela guarda) para a API de Conversoes da Meta.
+                // s1 explicito no link de destino sempre ganha; sem fbclid, nao carimba.
+                if (params['fbclid'] && !url.searchParams.has('s1')) {
+                  url.searchParams.set('s1', params['fbclid']);
+                }
+
                 a.href = url.toString();
               } catch(err){}
             }, true);
