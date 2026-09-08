@@ -65,6 +65,7 @@ export default function RootLayout({
           (function(){
             var KEYS = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','fbclid','src','sck'];
             var STORE_KEY = 'cf_attribution';
+            var FBC_KEY = '_fbc';
 
             function readStored(){
               try {
@@ -87,6 +88,21 @@ export default function RootLayout({
                 var value = entry.get(KEYS[i]);
                 if (value) { stored[KEYS[i]] = value; touched = true; }
               }
+
+              // O fbc da Meta e fb.1.<timestamp>.<fbclid>, e o timestamp precisa ser
+              // o da chegada na LP, nao o do clique no botao. Por isso montamos aqui e
+              // guardamos pronto: a navegacao interna reaproveita o valor original.
+              // FBC_KEY nao esta em KEYS, entao nunca vira parametro sozinho na URL.
+              var fbclidNovo = entry.get('fbclid');
+              if (fbclidNovo) {
+                stored[FBC_KEY] = 'fb.1.' + Date.now() + '.' + fbclidNovo;
+                touched = true;
+              } else if (stored['fbclid'] && !stored[FBC_KEY]) {
+                // Sessao aberta antes desta versao: carimba agora, uma vez so.
+                stored[FBC_KEY] = 'fb.1.' + Date.now() + '.' + stored['fbclid'];
+                touched = true;
+              }
+
               if (touched) writeStored(stored);
             } catch(e){}
 
@@ -116,11 +132,12 @@ export default function RootLayout({
                 }
 
                 // A Kiwify so guarda uma lista fixa de parametros e o fbclid nao
-                // esta nela: ele chega no checkout mas some no webhook. Copiamos o
-                // mesmo valor em s1 (que ela guarda) para a API de Conversoes da Meta.
+                // esta nela: ele chega no checkout mas some no webhook. Mandamos o fbc
+                // ja montado em s1 (que ela guarda) para a API de Conversoes da Meta,
+                // que espera fb.1.<timestamp>.<fbclid> e nao o fbclid cru.
                 // s1 explicito no link de destino sempre ganha; sem fbclid, nao carimba.
-                if (params['fbclid'] && !url.searchParams.has('s1')) {
-                  url.searchParams.set('s1', params['fbclid']);
+                if (params[FBC_KEY] && !url.searchParams.has('s1')) {
+                  url.searchParams.set('s1', params[FBC_KEY]);
                 }
 
                 a.href = url.toString();
