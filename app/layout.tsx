@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import SocialProofToast from "@/components/SocialProofToast";
 import FreeBanner from "@/components/FreeBanner";
+import CheckoutIndex from "@/components/CheckoutIndex";
 
 export const metadata: Metadata = {
   title: "Caption Flow — Legendas animadas em segundos no Premiere Pro",
@@ -42,6 +43,7 @@ export default function RootLayout({
         `}</Script>
       </head>
       <body className="min-h-full">
+        <CheckoutIndex />
         <FreeBanner />
         {children}
         <SocialProofToast />
