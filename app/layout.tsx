@@ -39,7 +39,7 @@ export default function RootLayout({
         `}</Script>
         {/* Google Tag Manager */}
         <Script id="google-tag-manager" strategy="afterInteractive">{`
-          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src="https://api.captionflow.com.br/d7ysednnoxju.js?"+i;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','ap3e=HA5FKDojSVA4Uk48OiNTQwNXSkFfSAALSAkZHxoHCwsTBhcYQA0LCFsICg%3D%3D');
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src="https://api.captionflow.com.br/d7ysednnoxju.js?"+i;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','ap3e=HA5FKDojSTU5Ui4tNiZQQwNXSkFfSAALSAkZHxoHCwsTBhcYQA0LCFsICg%3D%3D');
         `}</Script>
       </head>
       <body className="min-h-full">
