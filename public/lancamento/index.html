@@ -184,7 +184,7 @@ footer a{color:#8a8888;text-decoration:none}
 </head>
 <body>
 
-<a class="topbar" href="#" data-wa target="_blank" rel="noopener"><span><i class="dot"></i>Lançamento 12.10</span><span class="mid">Caption Flow Pro chega ao DaVinci Resolve</span><u>Entrar no grupo →</u></a>
+<a class="topbar" href="#" data-wa><span><i class="dot"></i>Lançamento 12.10</span><span class="mid">Caption Flow Pro chega ao DaVinci Resolve</span><u>Entrar no grupo →</u></a>
 
 <!-- ═══ HERO ═══ -->
 <section class="hero">
@@ -202,7 +202,7 @@ footer a{color:#8a8888;text-decoration:none}
       <p class="sub">Dia 12/10 o Caption Flow Pro ganha transcrição nativa, corte de silêncio e J-cut automático, no Premiere e no DaVinci Resolve. <strong>Quem está no grupo fica sabendo primeiro.</strong></p>
 
       <div>
-        <a class="btn" id="hero-cta" href="#" data-wa target="_blank" rel="noopener">
+        <a class="btn" id="hero-cta" href="#" data-wa>
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.5A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"/></svg>
           Entrar no grupo do lançamento
         </a>
@@ -289,7 +289,7 @@ footer a{color:#8a8888;text-decoration:none}
       <div><b>03</b><p><strong>Prévia e demo.</strong> As ferramentas rodando de verdade, e dúvidas respondidas na hora.</p></div>
     </div>
 
-    <a class="btn" href="#" data-wa target="_blank" rel="noopener">
+    <a class="btn" href="#" data-wa>
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.5A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"/></svg>
       Entrar no grupo do lançamento
     </a>
@@ -307,7 +307,7 @@ footer a{color:#8a8888;text-decoration:none}
 </footer>
 
 <div class="sticky" id="sticky">
-  <a class="btn" href="#" data-wa target="_blank" rel="noopener">
+  <a class="btn" href="#" data-wa>
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.5A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"/></svg>
     Entrar no grupo do lançamento
   </a>
@@ -321,7 +321,8 @@ var CF_CONFIG = {
 };
 /* ============================== */
 (function () {
-  // Links do grupo. Abrem em NOVA aba para a página não descarregar antes do Lead sair.
+  // Links do grupo. Abrem na MESMA aba com 300 ms de atraso: o pixel tem tempo de enviar
+  // o Lead antes da página sair, e funciona no navegador do Instagram/Facebook.
   // O Lead vai direto pelo pixel (fbq, carregado pelo GTM), no máximo 1x por sessão.
   // NÃO criar tag/acionador de Lead no GTM: contaria em dobro.
   function leadSent() { try { return sessionStorage.getItem('cf_lead') === '1'; } catch (e) { return false; } }
@@ -329,9 +330,8 @@ var CF_CONFIG = {
   var ctas = document.querySelectorAll('a[data-wa]');
   Array.prototype.forEach.call(ctas, function (a, i) {
     a.href = CF_CONFIG.whatsappLink;
-    a.target = '_blank';
-    a.rel = 'noopener';
-    a.addEventListener('click', function () {
+    a.addEventListener('click', function (ev) {
+      ev.preventDefault();
       try {
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({ event: 'lead_grupo_whatsapp', cta_position: i + 1 });
@@ -343,6 +343,8 @@ var CF_CONFIG = {
           markLead();
         }
       } catch (e) {}
+      // lê o href na hora (o GTM acrescenta utm/src/sck no link)
+      setTimeout(function () { window.location.href = a.href || CF_CONFIG.whatsappLink; }, 300);
     });
   });
 
