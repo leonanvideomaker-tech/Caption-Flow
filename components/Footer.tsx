@@ -15,6 +15,8 @@ export default function Footer() {
           <a href="#funcionalidades" className="hover:text-white transition-colors">Funcionalidades</a>
           <a href="#offer" className="hover:text-white transition-colors">Preços</a>
           <a href="#offer" className="hover:text-white transition-colors">FAQ</a>
+          <a href="/privacidade.html" className="hover:text-white transition-colors">Privacidade</a>
+          <a href="/termos.html" className="hover:text-white transition-colors">Termos</a>
         </div>
         <div className="flex flex-col items-center md:items-end gap-1">
           <p className="text-[#6e6e73]" style={{ fontSize: "0.72rem" }}>
