@@ -940,7 +940,7 @@ footer a{text-decoration:none}
       <p class="rv">Pode continuar assim. Transcrevendo em outro site, cortando silêncio na mão, arrastando áudio clipe por clipe, sincronizando legenda palavra por palavra.</p>
       <p class="rv">Mas toda hora gasta nisso é uma hora a menos criando. É um projeto a menos entregue. É mais um vídeo com um acabamento que não reflete o seu nível.</p>
       <p class="forte rv" id="final-forte">Por <b>12x de R$ 25,55</b>, você para de perder tempo com isso hoje.</p>
-      <a class="btn btn-primary rv" href="https://pay.kiwify.com.br/ZBIgHVx" target="_blank" rel="noopener noreferrer" data-checkout="final">Resolver isso agora<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-primary rv" href="https://chat.whatsapp.com/C97wg0Wp6OgAVsFGiOPAUV" data-wa="final">Resolver isso agora<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <small class="rv">Acesso imediato · Premiere Pro 2025 e 2026 · DaVinci Resolve 21 · Garantia de 7 dias</small>
     </div>
   </section>
@@ -964,6 +964,7 @@ footer a{text-decoration:none}
 /* ======= CONFIGURE AQUI ======= */
 var CF = {
   checkout: "https://pay.kiwify.com.br/ZBIgHVx",   // trocar se o lançamento tiver outro link
+  whatsappLink: "https://chat.whatsapp.com/C97wg0Wp6OgAVsFGiOPAUV", // grupo do lançamento (o mesmo da /lancamento)
   fimPromo: "2026-10-19T23:59:59-03:00",           // horário de Brasília
   precoDepois: "347"
 };
@@ -1418,6 +1419,31 @@ var CF = {
   }
   tick(); setInterval(tick, 1000);
 
+  /* botões -> grupo do WhatsApp, igual à /lancamento: abrem na MESMA aba com 300 ms de atraso
+     (o pixel tem tempo de enviar o Lead e funciona no navegador do Instagram/Facebook).
+     O Lead vai direto pelo pixel (fbq, carregado pelo GTM), no máximo 1x por sessão.
+     NÃO criar tag/acionador de Lead no GTM: contaria em dobro. */
+  function leadSent() { try { return sessionStorage.getItem('cf_lead') === '1'; } catch (e) { return false; } }
+  function markLead() { try { sessionStorage.setItem('cf_lead', '1'); } catch (e) {} }
+  each(document.querySelectorAll('a[data-wa]'), function (a) {
+    a.href = CF.whatsappLink;
+    a.addEventListener('click', function (ev) {
+      ev.preventDefault();
+      try {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'lead_grupo_whatsapp', cta_position: 'final' });
+        if (typeof clarity === 'function') clarity('event', 'lead_grupo_whatsapp');
+      } catch (e) {}
+      try {
+        if (!leadSent() && typeof fbq === 'function') {
+          fbq('track', 'Lead', { content_name: 'grupo_lancamento_davinci' });
+          markLead();
+        }
+      } catch (e) {}
+      // lê o href na hora (o GTM acrescenta utm/src/sck no link)
+      setTimeout(function () { window.location.href = a.href || CF.whatsappLink; }, 300);
+    });
+  });
   /* checkout: abre a Kiwify em nova aba, como na home antiga (sem preventDefault — o GTM vê o clique normal) */
   each(document.querySelectorAll('[data-checkout]'), function (a) {
     a.href = CF.checkout;
