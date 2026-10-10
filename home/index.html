@@ -868,7 +868,7 @@ footer a{text-decoration:none}
         <p class="sobe-t" style="font-size:14px;color:#6b6b6b">Preço de lançamento até <b>segunda, 19/10, às 23h59</b></p>
       </div>
 
-      <a class="btn btn-primary rv" href="https://pay.kiwify.com.br/ZBIgHVx" target="_blank" rel="noopener noreferrer" data-checkout="oferta">Quero o Caption Flow<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-primary rv" href="https://chat.whatsapp.com/C97wg0Wp6OgAVsFGiOPAUV" data-wa="oferta">Quero o Caption Flow<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <div class="of-social rv">
         <div class="avs"><img src="/avatars/avatar-pedro.png" alt=""><img src="/avatars/avatar-bryan.png" alt=""><img src="/avatars/avatar-gleisson.png" alt=""><img src="/avatars/avatar-diego.png" alt=""><img src="/avatars/avatar-jammal.png" alt=""></div>
         <p><strong>+1.000 editores</strong><br>já usam o Caption Flow</p>
@@ -1431,7 +1431,7 @@ var CF = {
       ev.preventDefault();
       try {
         window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({ event: 'lead_grupo_whatsapp', cta_position: 'final' });
+        window.dataLayer.push({ event: 'lead_grupo_whatsapp', cta_position: a.getAttribute('data-wa') });
         if (typeof clarity === 'function') clarity('event', 'lead_grupo_whatsapp');
       } catch (e) {}
       try {
